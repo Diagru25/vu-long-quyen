@@ -1,12 +1,13 @@
-import React from 'react';
+import './StudentsManagement.scss';
+import React, { Fragment } from 'react';
+
+import Layouts from 'shared/layouts';
 
 const StudentsManagement = () => {
   return (
-    <div>
-      Hello
-      <p>Son</p>
-      <p>Tien</p>
-    </div>
+    <Fragment>
+      <Layouts>hello S&T</Layouts>
+    </Fragment>
   );
 };
 

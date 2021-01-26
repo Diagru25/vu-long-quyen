@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  .logo {
+  }
+  .avatar {
+    .username {
+      margin: 10px;
+    }
+  }
+}
