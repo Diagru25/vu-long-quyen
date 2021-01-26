@@ -1,1 +1,1 @@
-import { createAsyncThunk } from '../../../packages/core/adpaters/redux-toolkit';
+import { createAsyncThunk } from 'adapters/redux-toolkit';

@@ -3,6 +3,6 @@ import './index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import StudentsManagement from './app/StudentsManagement/StudentsManagement';
+import App from 'src/App';
 
-ReactDOM.render(<StudentsManagement />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
