@@ -8,6 +8,14 @@
   line-height: 40px;
   padding: 0 20px;
 
+  i {
+    &:hover {
+      cursor: pointer;
+      background-color: #646464;
+      border-radius: 5px;
+    }
+  }
+
   .left-actions {
     float: left;
   }
