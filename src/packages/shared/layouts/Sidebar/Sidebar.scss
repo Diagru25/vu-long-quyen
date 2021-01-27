@@ -1,6 +1,54 @@
 .sidebar {
+  position: relative;
   width: 300px;
-  min-width: 300px;
   height: calc(100vh - 45px);
   background-color: #fafafa;
+  transition: all 0.5s ease-in-out;
+  animation-name: show;
+  animation-duration: 0.5s;
+  padding-top: 50px;
+
+  .left-menu {
+    li {
+      line-height: 2;
+      padding: 5px;
+      margin-right: 5px;
+      padding-left: 18px;
+
+      &:hover {
+        cursor: pointer;
+        background: #ffffff;
+        color: #1890ff;
+      }
+    }
+  }
+}
+
+.sidebar-hidden {
+  width: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
+  animation-name: hidden;
+  animation-duration: 0.5s;
+}
+
+@keyframes show {
+  0% {
+    transform: translateX(-300px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes hidden {
+  0% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(-300px);
+  }
 }
