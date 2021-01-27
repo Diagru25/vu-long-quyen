@@ -14,7 +14,14 @@ const Layouts = ({ children }) => {
         <div className='main'>
           <Sidebar />
           <div className='content'>
-            <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb
+              style={{
+                margin: '5px 0px',
+                padding: '5px',
+                backgroundColor: '#f3f3f3',
+                borderRadius: ' 5px',
+              }}
+            >
               <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
               <Breadcrumb.Item>S&T</Breadcrumb.Item>
             </Breadcrumb>
