@@ -1,9 +1,10 @@
 import { createSlice } from 'adapters/redux-toolkit';
 
 const menuSlice = createSlice({
-  name: 'menu',
-  initialState: {},
-  reducers: {},
-});
+	name: 'menu',
+	initialState: { isShowSideBar: true },
+	reducers: {
 
+	},
+});
 export default menuSlice.reducer;
