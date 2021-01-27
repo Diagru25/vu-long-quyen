@@ -20,7 +20,7 @@ const studentServices = {
 };
 
 const beltServices = {
-    getAllbelts: () => {
+    getAllBelts: () => {
         return db.ref('/belts').once('value');
     },
     addBelt: (belt) => {

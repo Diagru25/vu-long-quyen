@@ -1,4 +1,5 @@
 import { createSlice } from 'adapters/redux-toolkit';
+import { fetchStudents, saveCurrentStudent, deleteStudent } from './studentAction';
 
 const studentDefault = {
     key: null,
@@ -28,6 +29,27 @@ const StudentSlice = createSlice({
         setDefaultStudent: state => state.currentStudent = studentDefault,
         setCurrentStudent: (state, action) => {
             state.currentStudent = action.payload
+        },
+        updateCurrentStudent: (state, action) => {
+            state.currentStudent = { ...state.currentStudent, ...action.payload }
+        },
+        updateState: (state, action) => {
+            state = { ...state, ...action.payload }
+        }
+    },
+    extraReducers: {
+        [fetchStudents.fulfilled]: (state, action) => {
+            state.list = [...action.payload.data];
+            state.total = action.total;
+            console.log('fetch success');
+        },
+        [saveCurrentStudent.fulfilled]: (state, action) => {
+            console.log('save success')
+        },
+        [deleteStudent.fulfilled]: (state) => {
+            console.log('delete success')
         }
     }
-})
+});
+export const { setDefaultStudent, setCurrentStudent } = StudentSlice.actions;
+export default StudentSlice.reducer;
