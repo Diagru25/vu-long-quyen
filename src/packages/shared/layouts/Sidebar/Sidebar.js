@@ -1,15 +1,22 @@
+import './Sidebar.scss';
+
 import { Menu } from 'adapters/ant-design';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const Sidebar = () => {
   return (
-    <Fragment>
-      <Menu theme='dark'>
-        <Menu.Item key='1'>Dashboard</Menu.Item>
-        <Menu.Item key='2'>Settings</Menu.Item>
-        <Menu.Item key='3'>Logout</Menu.Item>
+    <div className='sidebar'>
+      <Menu style={{ backgroundColor: '#fafafa' }}>
+        <Menu.Item key='1'>
+          <i class='fas fa-home'></i>
+          Dashboard
+        </Menu.Item>
+        <Menu.Item key='2'>
+          <i class='fas fa-cog'></i>
+          Settings
+        </Menu.Item>
       </Menu>
-    </Fragment>
+    </div>
   );
 };
 export default Sidebar;

@@ -1,12 +1,22 @@
 .container {
-  display: flex;
-  justify-content: space-between;
+  grid-row: 1;
+  grid-column: 1 / 4;
+  display: block;
+  background-color: #3d3d3d;
   color: #fff;
-  .logo {
+  height: 45px;
+  line-height: 40px;
+  padding: 0 20px;
+
+  .left-actions {
+    float: left;
   }
+
+  .right-actions {
+    float: right;
+  }
+
   .avatar {
-    .username {
-      margin: 10px;
-    }
+    float: right;
   }
 }

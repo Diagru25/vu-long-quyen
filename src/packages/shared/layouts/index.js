@@ -1,31 +1,27 @@
 import './index.scss';
-import { Layout } from 'adapters/ant-design';
+import { Breadcrumb } from 'adapters/ant-design';
 
 import React from 'react';
 
-import HeaderComponent from 'shared/layouts/Header/Header';
+import Header from 'shared/layouts/Header/Header';
 import Sidebar from 'shared/layouts/Sidebar/Sidebar';
-import FooterComponent from 'shared/layouts/Footer/Footer';
 
 const Layouts = ({ children }) => {
-  const { Header, Footer, Sider, Content } = Layout;
   return (
     <>
-      <Layout style={{ height: '100vh' }}>
-        <Header>
-          <HeaderComponent />
-        </Header>
-
-        <Layout>
-          <Sider>
-            <Sidebar />
-          </Sider>
-          <Content>{children}</Content>
-        </Layout>
-        <Footer style={{ textAlign: 'center' }}>
-          <FooterComponent />
-        </Footer>
-      </Layout>
+      <div className='layout'>
+        <Header />
+        <div className='main'>
+          <Sidebar />
+          <div className='content'>
+            <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+              <Breadcrumb.Item>S&T</Breadcrumb.Item>
+            </Breadcrumb>
+            {children}
+          </div>
+        </div>
+      </div>
     </>
   );
 };
