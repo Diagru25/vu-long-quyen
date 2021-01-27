@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
 body {
   margin: 0;
@@ -18,4 +18,9 @@ i {
   font-size: 18px;
   padding: 8px;
   margin: 5px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
 }
