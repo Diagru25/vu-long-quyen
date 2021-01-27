@@ -37,18 +37,20 @@ const StudentSlice = createSlice({
             state = { ...state, ...action.payload }
         }
     },
-    extraReducers: {
-        [fetchStudents.fulfilled]: (state, action) => {
-            state.list = [...action.payload.data];
-            state.total = action.total;
-            console.log('fetch success');
-        },
-        [saveCurrentStudent.fulfilled]: (state, action) => {
-            console.log('save success')
-        },
-        [deleteStudent.fulfilled]: (state) => {
-            console.log('delete success')
-        }
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchStudents.fulfilled, (state, action) => {
+                state.list = [...action.payload.data];
+                state.total = action.total;
+                console.log('fetch success');
+            })
+            .addCase(saveCurrentStudent.fulfilled, (state, action) => {
+                console.log('save success');
+            })
+            .addCase(deleteStudent.fulfilled, (state, action) => {
+                console.log('save success');
+            })
+            .addDefaultCase((state, action) => { })
     }
 });
 export const { setDefaultStudent, setCurrentStudent } = StudentSlice.actions;
