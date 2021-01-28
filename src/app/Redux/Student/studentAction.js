@@ -1,13 +1,12 @@
 import { createAsyncThunk } from 'adapters/redux-toolkit';
 import { studentServices } from 'helper/services/services';
-import { useSelector, useDispatch } from 'react-redux';
 
-export const fetchStudents = createAsyncThunk(
+const fetchStudents = createAsyncThunk(
     'student/getAll',
-    async (pageIndex = 1) => {
+    async (pageIndex = 1, { dispatch, getState }) => {
         let snapShot = await studentServices.fetchStudents();
 
-        let { pageSize } = useSelector(state => state.studentReducer);
+        let { pageSize } = getState().studentReducer;
         let data = [];
         let total = snapShot.numChildren();
 
@@ -24,34 +23,35 @@ export const fetchStudents = createAsyncThunk(
     }
 )
 
-export const saveCurrentStudent = createAsyncThunk(
+const saveCurrentStudent = createAsyncThunk(
     'student/saveCurrentStudent',
-    async () => {
+    async (empty = {}, { dispatch, getState }) => {
+
         try {
-            let { curStudent, pageIndex } = useSelector(state => state.studentReducer);
-            if (curStudent.key === null) {
-                curStudent.key = await studentServices.addStudent(curStudent);
-                useDispatch(fetchStudents(pageIndex))
+            let { pageIndex, currentStudent } = getState().studentReducer;
+            if (currentStudent.key === null) {
+
+                await studentServices.addStudent(currentStudent);
+                dispatch(fetchStudents(pageIndex))
             }
             else {
-                await studentServices.updateStudent(curStudent);
-                useDispatch(fetchStudents(pageIndex))
+                await studentServices.updateStudent(currentStudent);
+                dispatch(fetchStudents(pageIndex))
             }
 
-            return curStudent.key;
         } catch (ex) {
             console.log(ex);
         }
     }
 )
 
-export const deleteStudent = createAsyncThunk(
+const deleteStudent = createAsyncThunk(
     'student/delete',
-    async (id) => {
+    async (id, { dispatch, getState }) => {
         try {
-            let { pageIndex } = useSelector(state => state.studentReducer);
+            let { pageIndex } = getState().studentReducer;
             await studentServices.deleteStudent(id);
-            useDispatch(fetchStudents(pageIndex));
+            dispatch(fetchStudents(pageIndex));
 
             return;
         }
@@ -60,3 +60,9 @@ export const deleteStudent = createAsyncThunk(
         }
     }
 )
+
+export {
+    fetchStudents,
+    saveCurrentStudent,
+    deleteStudent
+}
