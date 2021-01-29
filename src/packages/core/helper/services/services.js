@@ -3,7 +3,7 @@ import firebase from 'helper/firebaseConfig';
 const db = firebase.database;
 const studentServices = {
     getAllStudents: () => {
-        return db.ref('/students').once('value');
+        return db.ref('/students').chi.startAt(20).once('value');
     },
     addStudent: (student) => {
         console.log(student);
