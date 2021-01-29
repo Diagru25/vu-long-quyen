@@ -24,9 +24,9 @@ const studentDefault = {
   contactNote: [], //{parentName: '', parentPhone: ''}
 };
 
-const fncSortListStudent = (arrInput, type) => {
-  return arrInput;
-};
+// const fncSortListStudent = (arrInput, type) => {
+//   return arrInput;
+// };
 
 const StudentSlice = createSlice({
   name: 'student',

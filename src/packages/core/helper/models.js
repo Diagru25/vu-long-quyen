@@ -28,6 +28,7 @@ export const MOCK_USER = {
   name: 'Tien',
   address: 'foo',
   dayOfBirth: '',
+  beltID: '1',
   phoneNumber: '0987876403',
   startDate: '',
   endDate: '',
