@@ -11,12 +11,12 @@ const Header = () => {
         <Fragment>
             <div className='container'>
                 <div className='left-actions'>
-                    <i class='fas fa-align-justify' onClick={() => dispatch(toggleSideBar())}></i>
-                    <i class='fas fa-home'></i>
+                    <i className='fas fa-align-justify' onClick={() => dispatch(toggleSideBar())}></i>
+                    <i className='fas fa-home'></i>
                 </div>
 
                 <div className='right-actions'>
-                    <i class='fas fa-sign-out-alt'></i>
+                    <i className='fas fa-sign-out-alt'></i>
                 </div>
 
                 <div className='avatar'>

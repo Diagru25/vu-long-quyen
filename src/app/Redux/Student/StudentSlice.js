@@ -13,6 +13,7 @@ const studentDefault = {
   phoneNumber: '',
   startDate: '',
   endDate: '',
+  createDate: '',
   isMember: true,
   months: [],
   promotionDate: [], //{type: beltID, onDate: ''}
@@ -23,14 +24,16 @@ const StudentSlice = createSlice({
   name: 'student',
   initialState: {
     list: [],
+    currentList: [],
     currentStudent: studentDefault,
 
     total: 0,
     pageSize: 10,
     pageIndex: 1,
   },
+
   reducers: {
-    setDefaultStudent: (state) => (state.currentStudent = studentDefault),
+    setDefaultStudent: (state) => console.log('dsihsi'),
     setCurrentStudent: (state, action) => {
       state.currentStudent = action.payload;
     },
@@ -49,14 +52,17 @@ const StudentSlice = createSlice({
         console.log('fetch success');
       })
       .addCase(saveCurrentStudent.fulfilled, (state, action) => {
+        state.currentStudent = studentDefault;
         console.log('save success');
       })
       .addCase(deleteStudent.fulfilled, (state, action) => {
         console.log('save success');
       })
-      .addDefaultCase((state, action) => {});
+      .addDefaultCase((state, action) => state);
   },
 });
 
 export const { setDefaultStudent, setCurrentStudent } = StudentSlice.actions;
+
+export const test = StudentSlice.name;
 export default StudentSlice.reducer;

@@ -6,7 +6,10 @@ const studentServices = {
         return db.ref('/students').once('value');
     },
     addStudent: (student) => {
+        console.log(student);
         return db.ref('/students').push(student);
+
+
     },
     updateStudent: (student) => {
         let { key, ...cloneStudent } = student;
