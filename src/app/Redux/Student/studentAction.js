@@ -1,45 +1,47 @@
 import { createAsyncThunk } from 'adapters/redux-toolkit';
 import { studentServices } from 'helper/services/services';
 
-const fetchStudents = createAsyncThunk(
+const fetchAllStudents = createAsyncThunk(
     'student/getAll',
-    async (pageIndex = 1, { dispatch, getState }) => {
-        let snapShot = await studentServices.fetchStudents();
+    async () => {
 
-        let { pageSize } = getState().studentReducer;
+        let snapShot = await studentServices.getAllStudents();
         let data = [];
         let total = snapShot.numChildren();
 
-        snapShot.forEach((child, index) => {
+        snapShot.forEach((child) => {
             let key = child.key;
-            let val = child.val;
-
-            if (index >= pageSize * (pageIndex - 1)
-                && index < pageSize * pageIndex)
-                data.push({ ...val, key });
+            let val = child.val();
+            data.push({ ...val, key });
         })
 
+        console.log('total: ', total);
         return { data, total }
     }
 )
 
-const saveCurrentStudent = createAsyncThunk(
-    'student/saveCurrentStudent',
-    async (empty = {}, { dispatch, getState }) => {
-
+const addStudent = createAsyncThunk(
+    'student/addStudent',
+    async (student = {}, { getState }) => {
         try {
-            let { pageIndex, currentStudent } = getState().studentReducer;
-            if (currentStudent.key === null) {
+            let { currentStudent } = getState().studentReducer;
+            let key = await (await studentServices.addStudent(currentStudent)).key;
+            return { key }
+        }
+        catch (ex) {
+            console.log(ex);
+        }
+    }
+)
 
-                await studentServices.addStudent(currentStudent);
-                dispatch(fetchStudents(pageIndex))
-            }
-            else {
-                await studentServices.updateStudent(currentStudent);
-                dispatch(fetchStudents(pageIndex))
-            }
-
-        } catch (ex) {
+const updateStudent = createAsyncThunk(
+    'student/updateStudent',
+    async (student = {}, { getState }) => {
+        try {
+            let { currentStudent } = getState().studentReducer;
+            await studentServices.updateStudent(currentStudent);
+        }
+        catch (ex) {
             console.log(ex);
         }
     }
@@ -51,7 +53,7 @@ const deleteStudent = createAsyncThunk(
         try {
             let { pageIndex } = getState().studentReducer;
             await studentServices.deleteStudent(id);
-            dispatch(fetchStudents(pageIndex));
+            dispatch(fetchAllStudents(pageIndex));
 
             return;
         }
@@ -62,7 +64,8 @@ const deleteStudent = createAsyncThunk(
 )
 
 export {
-    fetchStudents,
-    saveCurrentStudent,
+    fetchAllStudents,
+    addStudent,
+    updateStudent,
     deleteStudent
 }

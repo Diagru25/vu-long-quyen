@@ -6,10 +6,10 @@ import store from 'src/Redux/store';
 import StudentsManagement from 'src/StudentsManagement/StudentsManagement';
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <StudentsManagement />
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <StudentsManagement />
+        </Provider>
+    );
 };
 export default App;

@@ -1,6 +1,7 @@
 export * from './studentAction';
 export {
     default as studentReducer,
-    setDefaultStudent
+    setDefaultStudent,
+    getStudentForPage
 
 } from './StudentSlice';
