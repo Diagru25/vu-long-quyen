@@ -2,6 +2,7 @@ export * from './studentAction';
 export {
     default as studentReducer,
     setDefaultStudent,
-    getStudentForPage
+    getStudentForPage,
+    updateCurrentStudent
 
 } from './StudentSlice';

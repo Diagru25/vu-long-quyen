@@ -20,6 +20,7 @@ const fetchAllStudents = createAsyncThunk(
     }
 )
 
+
 const addStudent = createAsyncThunk(
     'student/addStudent',
     async (student = {}, { getState }) => {

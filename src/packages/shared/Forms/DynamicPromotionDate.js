@@ -1,71 +1,111 @@
 import React from 'react';
 import {
-  Collapse,
-  Form,
-  Select,
-  Button,
-  DatePicker,
-  Space,
+    Collapse,
+    Form,
+    Select,
+    Button,
+    DatePicker,
+    Space,
 } from 'adapters/ant-design';
 import { MinusCircleOutlined } from 'adapters/ant-design';
 
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { updateCurrentStudent } from 'src//Redux/Student';
+
 import { BELTS } from 'helper/models';
 
-export const DynamicPromotionDate = () => {
-  const { Panel } = Collapse;
-  const { Option } = Select;
+export const DynamicPromotionDate = ({ data }) => {
 
-  return (
-    <Collapse>
-      <Panel header='Thông tin thăng đai'>
-        <Form.List name='promotionDate'>
-          {(fields, { add, remove }) => {
-            return (
-              <>
-                {fields.map((field) => (
-                  <Space
-                    key={field.key}
-                    style={{ display: 'flex' }}
-                    align='baseline'
-                  >
-                    <Form.Item name={[field.name, 'type']}>
-                      <Select placeholder='Chọn đai' allowClear>
-                        {BELTS.map((belt) => (
-                          <Option key={belt.beltID} value={belt.beltID}>
-                            {belt.title}
-                          </Option>
-                        ))}
-                      </Select>
-                    </Form.Item>
+    const { Panel } = Collapse;
+    const { Option } = Select;
 
-                    <Form.Item name={[field.name, 'onDate']}>
-                      <DatePicker />
-                    </Form.Item>
+    const dispatch = useDispatch();
 
-                    <MinusCircleOutlined
-                      onClick={() => {
-                        remove(field.name);
-                      }}
-                    />
-                  </Space>
-                ))}
+    const handleOnChangeSelect = (value, index) => {
+        let promotionDate = [...data];
+        let prvElement = promotionDate[index];
 
-                <Button
-                  type='dashed'
-                  onClick={() => {
-                    add();
-                  }}
-                  style={{ width: '100%' }}
-                >
-                  Thêm thông tin
+        promotionDate[index] = { ...prvElement, type: value };
+
+        dispatch(updateCurrentStudent({ promotionDate }));
+
+    };
+
+    const handleOnChangeDate = (date, dateString, index) => {
+        let promotionDate = [...data];
+        let prvElement = promotionDate[index];
+
+        promotionDate[index] = { ...prvElement, onDate: dateString };
+
+        dispatch(updateCurrentStudent({ promotionDate }));
+    }
+
+    return (
+        <Collapse>
+            <Panel header='Thông tin thăng đai'>
+                <Form.List name='promotionDate' initialValue={data}>
+                    {(fields, { add, remove }) => {
+                        return (
+                            <>
+                                {fields.map((field, index) => (
+                                    <Space
+                                        key={field.key}
+                                        style={{ display: 'flex' }}
+                                        align='baseline'
+                                    >
+                                        <Form.Item name={[field.name, 'type']}>
+                                            <Select
+                                                allowClear
+                                                placeholder='Chọn đai'
+                                                onChange={(value) => handleOnChangeSelect(value, index)}
+                                            >
+                                                {BELTS.map((belt) => (
+                                                    <Option key={belt.beltID} value={belt.beltID}>
+                                                        {belt.title}
+                                                    </Option>
+                                                ))}
+                                            </Select>
+                                        </Form.Item>
+
+                                        <Form.Item name={[field.name, 'onDate']}>
+                                            <DatePicker
+                                                format='DD-MM-YYYY'
+                                                value={moment(data.onDate, 'DD-MM-YYYY') || null}
+                                                onChange={(date, dateString, index) => handleOnChangeDate(date, dateString, index)}
+                                            />
+                                        </Form.Item>
+
+                                        <MinusCircleOutlined
+                                            onClick={() => {
+                                                let promotionDate = [...data];
+                                                promotionDate.splice(index, 1);
+                                                dispatch(updateCurrentStudent({ promotionDate }));
+                                                remove(field.name);
+                                            }}
+                                        />
+                                    </Space>
+                                ))}
+
+                                <Button
+                                    type='dashed'
+                                    onClick={() => {
+                                        let promotionDate = [...data];
+                                        promotionDate.push({ type: '', onDate: '' });
+                                        dispatch(updateCurrentStudent({ promotionDate }));
+                                        add();
+                                    }}
+                                    style={{ width: '100%' }}
+                                >
+                                    Thêm thông tin
                 </Button>
-              </>
-            );
-          }}
-        </Form.List>
-      </Panel>
-    </Collapse>
-  );
+                            </>
+                        );
+                    }}
+                </Form.List>
+            </Panel>
+        </Collapse>
+    );
 };
 
 export default DynamicPromotionDate;

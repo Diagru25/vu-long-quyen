@@ -12,9 +12,11 @@ import StudentActions from './components/StudentActions';
 const StudentsManagement = () => {
 
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(fetchAllStudents());
     }, [dispatch])
+
     return (
         <Fragment>
             <Layouts>
