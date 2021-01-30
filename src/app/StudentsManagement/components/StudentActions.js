@@ -5,7 +5,7 @@ import { Input, Button } from 'adapters/ant-design';
 import React, { useState } from 'react';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { addStudent, updateCurrentStudent, setDefaultStudent, fetchAllStudents } from 'src/Redux/Student';
+import { addStudent, updateCurrentStudent, setDefaultStudent } from 'src/Redux/Student';
 
 import StudentModal from 'shared/modals/StudentModal';
 
@@ -36,23 +36,21 @@ const StudentActions = () => {
     };
 
     return (
-        <>
-            <div className='actions'>
-                <Input placeholder='Search student...' style={{ margin: '0  15px' }} />
-                <Button type='primary' onClick={showStudentModal}>
-                    Thêm mới
-        </Button>
-                <StudentModal
-                    isVisible={isVisible}
-                    title={title}
-                    handleCancel={handleCancel}
-                    footer={[
-                        <Button key='btn1' type='default' onClick={handleCancel}>Hủy</Button>,
-                        <Button key='btn2' type='primary' onClick={handleOK}>Lưu</Button>
-                    ]}
-                />
-            </div>
-        </>
+        <div className='actions'>
+            <Input placeholder='Search student...' style={{ margin: '0  15px' }} />
+            <Button type='primary' onClick={showStudentModal}>
+                Thêm mới
+                </Button>
+            <StudentModal
+                isVisible={isVisible}
+                title={title}
+                handleCancel={handleCancel}
+                footer={[
+                    <Button key='btn1' type='default' onClick={handleCancel}>Hủy</Button>,
+                    <Button key='btn2' type='primary' onClick={handleOK}>Lưu</Button>
+                ]}
+            />
+        </div>
     );
 };
 export default StudentActions;
