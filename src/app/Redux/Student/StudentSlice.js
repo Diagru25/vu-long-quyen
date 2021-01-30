@@ -33,6 +33,8 @@ const StudentSlice = createSlice({
         total: 0,
         pageSize: 10,
         pageIndex: 1,
+
+        loading: false
     },
 
     reducers: {
@@ -47,36 +49,43 @@ const StudentSlice = createSlice({
         },
         getStudentForPage: (state) => {
             state.currentList = [];
-            //state.currentList = fncGetFromTo([...state.list], state.pageSize, state.pageIndex);
-            // state.list.forEach((child, index) => {
-            //     if (index >= 0 && index < 10) {
-            //         console.log('push: ', child.key);
-            //         state.currentList.push(child);
-            //     }
+            let from = state.pageSize * (state.pageIndex - 1);
+            let to = state.pageSize * state.pageIndex;
+            state.list.forEach((student, index) => {
+                if (index >= from && index < to)
+                    state.currentList.push(student);
+            })
 
-            // })
-            console.log('hfsdhfsudf');
-            // state.list.forEach((student,index) => {
-            //     if(index >= from && index < to)
-            //         state.currentList.push(student)
-            // })
         },
         updateState: (state, action) => {
             state = { ...state, ...action.payload };
         },
     },
     extraReducers: (builder) => {
+        builder.addCase(fetchAllStudents.pending, (state, action) => {
+            state.loading = true;
+        })
         builder.addCase(fetchAllStudents.fulfilled, (state, action) => {
             state.total = action.payload.total;
             state.list = action.payload.data;
 
+            state.currentList = [];
+            let from = state.pageSize * (state.pageIndex - 1);
+            let to = state.pageSize * state.pageIndex;
+            state.list.forEach((student, index) => {
+                if (index >= from && index < to)
+                    state.currentList.push(student);
+            })
+
+            state.loading = false;
+
             console.log('fetch success');
         });
         builder.addCase(addStudent.fulfilled, (state, action) => {
-            //let listTemp = state.list;
-            state.list.push({ ...state.currentStudent, ...action.payload.key });
-            //state.list = fncSortListStudent(state.list);
-            //state.currentList = fncGetFromTo(state.list, state.pageSize, state.pageIndex);
+            console.log(action.payload.key);
+            state.list.push({ ...state.currentStudent, key: action.payload.key });
+            state.total += 1;
+
             state.currentStudent = studentDefault;
 
             console.log('Add success');

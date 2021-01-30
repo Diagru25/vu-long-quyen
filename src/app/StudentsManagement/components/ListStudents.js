@@ -1,72 +1,95 @@
 import { Table, Button } from 'adapters/ant-design';
-import React from 'react';
+
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllStudents, getStudentForPage, updateState } from 'src/Redux/Student';
 
 const columns = [
-  { title: 'Name', dataIndex: 'name', key: 'name' },
-  { title: 'Age', dataIndex: 'age', key: 'age' },
-  { title: 'Address', dataIndex: 'address', key: 'address' },
-  {
-    title: 'Action',
-    dataIndex: '',
-    key: 'x',
-    render: () => (
-      <div>
-        <Button type='text'>Edit</Button>
-        <Button danger type='text'>
-          Delete
-        </Button>
-      </div>
-    ),
-  },
+    {
+        title: 'STT',
+        dataIndex: 'stt',
+        key: 'stt',
+        width: '5%',
+        align: 'center'
+    },
+    {
+        title: 'Họ Tên',
+        dataIndex: 'name',
+        key: 'name',
+        align: 'center'
+    },
+    {
+        title: 'Ngày sinh',
+        dataIndex: 'dayOfBirth',
+        key: 'dayOfBirth',
+        align: 'center'
+    },
+    {
+        title: 'Địa chỉ',
+        dataIndex: 'address',
+        key: 'address',
+        align: 'center'
+    },
+    {
+        title: 'Thao tác',
+        dataIndex: '',
+        key: 'x',
+        align: 'center',
+        render: () => (
+            <div>
+                <Button type='text'>Chi tiết</Button>
+                <Button danger type='default'>
+                    Xóa
+                </Button>
+            </div>
+        ),
+    },
 ];
 
-const data = [
-  {
-    key: 1,
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    description:
-      'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-  },
-  {
-    key: 2,
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    description:
-      'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
-  },
-  {
-    key: 3,
-    name: 'Not Expandable',
-    age: 29,
-    address: 'Jiangsu No. 1 Lake Park',
-    description: 'This not expandable',
-  },
-  {
-    key: 4,
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    description:
-      'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
-  },
-];
+
 
 const ListStudents = () => {
-  return (
-    <Table
-      columns={columns}
-      expandable={{
-        expandedRowRender: (record) => (
-          <p style={{ margin: 0 }}>{record.description}</p>
-        ),
-        rowExpandable: (record) => record.name !== 'Not Expandable',
-      }}
-      dataSource={data}
-    ></Table>
-  );
+
+    const { currentList, loading, total, pageIndex, pageSize } = useSelector(state => state.studentReducer);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchAllStudents());
+    }, [dispatch])
+
+    const handleOnChange = (page) => {
+        dispatch(updateState({ pageIndex: page }));
+        getStudentForPage();
+    }
+    const handleSizeChange = (current, pageSize) => {
+        dispatch(updateState({ pageSize: pageSize }));
+        getStudentForPage();
+    }
+
+    return (
+        <Table
+            columns={columns}
+            bordered={true}
+            loading={loading}
+            pagination={{
+                total: total,
+                pageSize: pageSize,
+                current: pageIndex,
+                showSizeChanger: true,
+                locale: { items_per_page: "/ Trang" },
+
+                onChange: handleOnChange,
+                onShowSizeChange: handleSizeChange,
+            }}
+            expandable={{
+                expandedRowRender: (record) => (
+                    <p style={{ margin: 0 }}>{record.description}</p>
+                ),
+                rowExpandable: (record) => record.name !== 'Not Expandable',
+            }}
+            dataSource={currentList.map((student, index) => { return { ...student, stt: index + 1 } })}
+        ></Table>
+    );
 };
 
 export default ListStudents;

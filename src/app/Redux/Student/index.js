@@ -3,6 +3,7 @@ export {
     default as studentReducer,
     setDefaultStudent,
     getStudentForPage,
-    updateCurrentStudent
+    updateCurrentStudent,
+    updateState
 
 } from './StudentSlice';

@@ -31,7 +31,7 @@ const StudentActions = () => {
         let today = moment().format('DD-MM-YYYY');
         dispatch(updateCurrentStudent({ createDate: today, startDate: today }));
         dispatch(addStudent());
-        dispatch(setDefaultStudent());
+        //dispatch(setDefaultStudent());
         setIsVisible(false);
     };
 
