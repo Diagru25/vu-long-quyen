@@ -52,11 +52,9 @@ const deleteStudent = createAsyncThunk(
     'student/delete',
     async (id, { dispatch, getState }) => {
         try {
-            let { pageIndex } = getState().studentReducer;
             await studentServices.deleteStudent(id);
-            dispatch(fetchAllStudents(pageIndex));
 
-            return;
+            return { key: id };
         }
         catch (ex) {
             console.log(ex)

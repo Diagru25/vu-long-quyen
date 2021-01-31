@@ -1,6 +1,6 @@
 import './StudentActions.scss';
 
-import { Input, Button } from 'adapters/ant-design';
+import { Input, Button, Select } from 'adapters/ant-design';
 
 import React, { useState } from 'react';
 import { moment } from 'adapters/moment';
@@ -13,6 +13,7 @@ import {
 } from 'src/Redux/Student';
 
 import StudentModal from 'shared/modals/StudentModal';
+import { SORT } from 'helper/models';
 
 const StudentActions = () => {
 
@@ -35,23 +36,21 @@ const StudentActions = () => {
         let today = moment().format('DD-MM-YYYY');
         dispatch(updateCurrentStudent({ createDate: today, startDate: today }));
         dispatch(addStudent());
-        //dispatch(setDefaultStudent());
         setIsVisible(false);
     };
-
     return (
         <div className='actions'>
-            <Input placeholder='Search student...' style={{ margin: '0  15px' }} />
             <Button type='primary' onClick={showStudentModal}>
                 Thêm mới
                 </Button>
+            <Input placeholder='Search student...' style={{ margin: '0  15px' }} />
             <StudentModal
                 isVisible={isVisible}
                 title={title}
                 handleCancel={handleCancel}
                 footer={[
                     <Button key='btn1' type='default' onClick={handleCancel}>Hủy</Button>,
-                    <Button key='btn2' type='primary' onClick={handleOK}>Lưu</Button>
+                    <Button key='btn2' type='primary' onClick={handleOK}>Thêm mới</Button>
                 ]}
             />
         </div>

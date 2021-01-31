@@ -23,6 +23,8 @@ const studentDefault = {
     contactNote: [], //{parentName: '', parentPhone: ''}
 };
 
+const regexSplit = `/[\s,]+/`;
+
 const StudentSlice = createSlice({
     name: 'student',
     initialState: {
@@ -34,6 +36,7 @@ const StudentSlice = createSlice({
         pageSize: 10,
         pageIndex: 1,
 
+        orderBy: 'nameDes',
         loading: false
     },
 
@@ -47,18 +50,33 @@ const StudentSlice = createSlice({
         updateCurrentStudent: (state, action) => {
             state.currentStudent = { ...state.currentStudent, ...action.payload };
         },
-        getStudentForPage: (state) => {
+        getStudentForPage: (state, action) => {
             state.currentList = [];
+
+            state.pageIndex = action.payload.pageIndex;
+            state.pageSize = action.payload.pageSize;
+
             let from = state.pageSize * (state.pageIndex - 1);
             let to = state.pageSize * state.pageIndex;
             state.list.forEach((student, index) => {
                 if (index >= from && index < to)
                     state.currentList.push(student);
             })
-
+        },
+        sortList: (state, action) => {
+            state.orderBy = action.payload;
+            switch (state.orderBy) {
+                case 'nameDes':
+                    break;
+                default: break;
+            }
         },
         updateState: (state, action) => {
-            state = { ...state, ...action.payload };
+            console.log('I do not understand why state does not update ?');
+            // console.log(action.payload);
+            // let temp = { ...state, ...action.payload };
+            // console.log(temp);
+            // state = temp;
         },
     },
     extraReducers: (builder) => {
@@ -86,6 +104,14 @@ const StudentSlice = createSlice({
             state.list.push({ ...state.currentStudent, key: action.payload.key });
             state.total += 1;
 
+            state.currentList = [];
+            let from = state.pageSize * (state.pageIndex - 1);
+            let to = state.pageSize * state.pageIndex;
+            state.list.forEach((student, index) => {
+                if (index >= from && index < to)
+                    state.currentList.push(student);
+            })
+
             state.currentStudent = studentDefault;
 
             console.log('Add success');
@@ -95,11 +121,27 @@ const StudentSlice = createSlice({
                 (student) => student.key === state.currentStudent.key
             );
             state.list[foundIndex] = state.currentStudent;
+
             state.currentStudent = studentDefault;
 
             console.log('Update success');
         });
         builder.addCase(deleteStudent.fulfilled, (state, action) => {
+
+            let foundIndex = state.list.findIndex(element => element.key === action.payload.key);
+            state.list.splice(foundIndex, 1);
+            state.total -= 1;
+
+            state.currentList = [];
+            let from = state.pageSize * (state.pageIndex - 1);
+            let to = state.pageSize * state.pageIndex;
+            state.list.forEach((student, index) => {
+                if (index >= from && index < to)
+                    state.currentList.push(student);
+            })
+
+            state.currentStudent = studentDefault;
+
             console.log('Delete success');
         });
         builder.addDefaultCase((state, action) => state);
