@@ -10,6 +10,7 @@ import {
     addStudent,
     updateCurrentStudent,
     setDefaultStudent,
+    sortList
 } from 'src/Redux/Student';
 
 import StudentModal from 'shared/modals/StudentModal';
@@ -42,7 +43,7 @@ const StudentActions = () => {
     };
 
     const handleFilter = (value) => {
-        console.log(`selected ${value}`);
+        dispatch(sortList(value));
     };
 
     return (

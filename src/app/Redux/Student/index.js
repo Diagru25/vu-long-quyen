@@ -5,6 +5,7 @@ export {
     getStudentForPage,
     updateCurrentStudent,
     updateState,
-    setCurrentStudent
+    setCurrentStudent,
+    sortList
 
 } from './StudentSlice';

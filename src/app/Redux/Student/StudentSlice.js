@@ -7,6 +7,23 @@ import {
     deleteStudent,
 } from './studentAction';
 
+
+const getFirstName = (s) => {
+    let pieces = s.split(/[\s,]+/);
+    return pieces[pieces.length - 1].toUpperCase();
+}
+
+const getFromTo = (arr, pageIndex, pageSize) => {
+    let result = [];
+    let from = pageSize * (pageIndex - 1);
+    let to = pageSize * pageIndex;
+    arr.forEach((child, index) => {
+        if (index >= from && index < to)
+            result.push(child);
+    })
+    return result;
+}
+
 const studentDefault = {
     key: null,
     name: '',
@@ -63,11 +80,19 @@ const StudentSlice = createSlice({
         },
         sortList: (state, action) => {
             state.orderBy = action.payload;
+
             switch (state.orderBy) {
                 case 'nameDes':
+                    state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+                    state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
                     break;
-                default: break;
+                case 'nameInc':
+                    state.list.sort((a, b) => (getFirstName(a.name) < getFirstName(b.name) ? 1 : -1));
+                    state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
+                    break;
+                default: alert('Chưa xong - mai làm !');
             }
+
         },
         updateState: (state, action) => {
             console.log('I do not understand why state does not update ?');
@@ -85,30 +110,19 @@ const StudentSlice = createSlice({
             state.total = action.payload.total;
             state.list = action.payload.data;
 
-            state.currentList = [];
-            let from = state.pageSize * (state.pageIndex - 1);
-            let to = state.pageSize * state.pageIndex;
-            state.list.forEach((student, index) => {
-                if (index >= from && index < to)
-                    state.currentList.push(student);
-            })
+            state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+
+            state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
             state.loading = false;
 
             console.log('fetch success');
         });
         builder.addCase(addStudent.fulfilled, (state, action) => {
-            console.log(action.payload.key);
             state.list.push({ ...state.currentStudent, key: action.payload.key });
             state.total += 1;
 
-            state.currentList = [];
-            let from = state.pageSize * (state.pageIndex - 1);
-            let to = state.pageSize * state.pageIndex;
-            state.list.forEach((student, index) => {
-                if (index >= from && index < to)
-                    state.currentList.push(student);
-            })
+            state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
             state.currentStudent = studentDefault;
 
@@ -152,6 +166,7 @@ export const {
     updateCurrentStudent,
     getStudentForPage,
     updateState,
+    sortList,
 } = StudentSlice.actions;
 
 export default StudentSlice.reducer;
