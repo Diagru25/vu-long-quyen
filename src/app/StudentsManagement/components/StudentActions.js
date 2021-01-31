@@ -3,12 +3,16 @@ import './StudentActions.scss';
 import { Input, Button } from 'adapters/ant-design';
 
 import React, { useState } from 'react';
-import moment from 'moment';
+import { moment } from 'adapters/moment';
+
 import { useDispatch } from 'react-redux';
-import { addStudent, updateCurrentStudent, setDefaultStudent } from 'src/Redux/Student';
+import {
+    addStudent,
+    updateCurrentStudent,
+    setDefaultStudent,
+} from 'src/Redux/Student';
 
 import StudentModal from 'shared/modals/StudentModal';
-
 
 const StudentActions = () => {
 

@@ -1,111 +1,111 @@
 import React from 'react';
 import {
-    Collapse,
-    Form,
-    Select,
-    Button,
-    DatePicker,
-    Space,
+  Collapse,
+  Form,
+  Select,
+  Button,
+  DatePicker,
+  Space,
 } from 'adapters/ant-design';
 import { MinusCircleOutlined } from 'adapters/ant-design';
 
-import moment from 'moment';
+import { moment } from 'adapters/moment';
 import { useDispatch } from 'react-redux';
 import { updateCurrentStudent } from 'src//Redux/Student';
 
 import { BELTS } from 'helper/models';
 
 export const DynamicPromotionDate = ({ data }) => {
+  const { Panel } = Collapse;
+  const { Option } = Select;
 
-    const { Panel } = Collapse;
-    const { Option } = Select;
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const handleOnChangeSelect = (value, index) => {
+    let promotionDate = [...data];
+    let prvElement = promotionDate[index];
 
-    const handleOnChangeSelect = (value, index) => {
-        let promotionDate = [...data];
-        let prvElement = promotionDate[index];
+    promotionDate[index] = { ...prvElement, type: value };
 
-        promotionDate[index] = { ...prvElement, type: value };
+    dispatch(updateCurrentStudent({ promotionDate }));
+  };
 
-        dispatch(updateCurrentStudent({ promotionDate }));
+  const handleOnChangeDate = (date, dateString, index) => {
+    let promotionDate = [...data];
+    let prvElement = promotionDate[index];
 
-    };
+    promotionDate[index] = { ...prvElement, onDate: dateString };
 
-    const handleOnChangeDate = (date, dateString, index) => {
-        let promotionDate = [...data];
-        let prvElement = promotionDate[index];
+    dispatch(updateCurrentStudent({ promotionDate }));
+  };
 
-        promotionDate[index] = { ...prvElement, onDate: dateString };
+  return (
+    <Collapse>
+      <Panel header='Thông tin thăng đai'>
+        <Form.List name='promotionDate' initialValue={data}>
+          {(fields, { add, remove }) => {
+            return (
+              <>
+                {fields.map((field, index) => (
+                  <Space
+                    key={field.key}
+                    style={{ display: 'flex' }}
+                    align='baseline'
+                  >
+                    <Form.Item name={[field.name, 'type']}>
+                      <Select
+                        allowClear
+                        placeholder='Chọn đai'
+                        onChange={(value) => handleOnChangeSelect(value, index)}
+                      >
+                        {BELTS.map((belt) => (
+                          <Option key={belt.beltID} value={belt.beltID}>
+                            {belt.title}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
 
-        dispatch(updateCurrentStudent({ promotionDate }));
-    }
+                    <Form.Item name={[field.name, 'onDate']}>
+                      <DatePicker
+                        format='DD-MM-YYYY'
+                        value={moment(data.onDate, 'DD-MM-YYYY') || null}
+                        onChange={(date, dateString, index) =>
+                          handleOnChangeDate(date, dateString, index)
+                        }
+                      />
+                    </Form.Item>
 
-    return (
-        <Collapse>
-            <Panel header='Thông tin thăng đai'>
-                <Form.List name='promotionDate' initialValue={data}>
-                    {(fields, { add, remove }) => {
-                        return (
-                            <>
-                                {fields.map((field, index) => (
-                                    <Space
-                                        key={field.key}
-                                        style={{ display: 'flex' }}
-                                        align='baseline'
-                                    >
-                                        <Form.Item name={[field.name, 'type']}>
-                                            <Select
-                                                allowClear
-                                                placeholder='Chọn đai'
-                                                onChange={(value) => handleOnChangeSelect(value, index)}
-                                            >
-                                                {BELTS.map((belt) => (
-                                                    <Option key={belt.beltID} value={belt.beltID}>
-                                                        {belt.title}
-                                                    </Option>
-                                                ))}
-                                            </Select>
-                                        </Form.Item>
+                    <MinusCircleOutlined
+                      onClick={() => {
+                        let promotionDate = [...data];
+                        promotionDate.splice(index, 1);
+                        dispatch(updateCurrentStudent({ promotionDate }));
+                        remove(field.name);
+                      }}
+                    />
+                  </Space>
+                ))}
 
-                                        <Form.Item name={[field.name, 'onDate']}>
-                                            <DatePicker
-                                                format='DD-MM-YYYY'
-                                                value={moment(data.onDate, 'DD-MM-YYYY') || null}
-                                                onChange={(date, dateString, index) => handleOnChangeDate(date, dateString, index)}
-                                            />
-                                        </Form.Item>
-
-                                        <MinusCircleOutlined
-                                            onClick={() => {
-                                                let promotionDate = [...data];
-                                                promotionDate.splice(index, 1);
-                                                dispatch(updateCurrentStudent({ promotionDate }));
-                                                remove(field.name);
-                                            }}
-                                        />
-                                    </Space>
-                                ))}
-
-                                <Button
-                                    type='dashed'
-                                    onClick={() => {
-                                        let promotionDate = [...data];
-                                        promotionDate.push({ type: '', onDate: '' });
-                                        dispatch(updateCurrentStudent({ promotionDate }));
-                                        add();
-                                    }}
-                                    style={{ width: '100%' }}
-                                >
-                                    Thêm thông tin
+                <Button
+                  type='dashed'
+                  onClick={() => {
+                    let promotionDate = [...data];
+                    promotionDate.push({ type: '', onDate: '' });
+                    dispatch(updateCurrentStudent({ promotionDate }));
+                    add();
+                  }}
+                  style={{ width: '100%' }}
+                >
+                  Thêm thông tin
                 </Button>
-                            </>
-                        );
-                    }}
-                </Form.List>
-            </Panel>
-        </Collapse>
-    );
+              </>
+            );
+          }}
+        </Form.List>
+      </Panel>
+    </Collapse>
+  );
 };
 
 export default DynamicPromotionDate;
