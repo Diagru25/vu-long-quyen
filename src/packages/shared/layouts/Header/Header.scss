@@ -1,7 +1,6 @@
 .container {
-  grid-row: 1;
-  grid-column: 1 / 4;
-  display: block;
+  display: flex;
+
   background-color: #3d3d3d;
   color: #fff;
   height: 45px;
@@ -21,14 +20,15 @@
   }
 
   .right-actions {
-    float: right;
+    margin-left: auto;
+    margin-right: 0;
   }
 
   .avatar {
-    float: right;
+    margin-right: 0;
   }
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
