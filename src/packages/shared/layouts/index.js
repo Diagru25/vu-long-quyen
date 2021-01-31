@@ -7,30 +7,30 @@ import Header from 'shared/layouts/Header/Header';
 import Sidebar from 'shared/layouts/Sidebar/Sidebar';
 
 const Layouts = ({ children }) => {
-  return (
-    <>
-      <div className='layout'>
-        <Header />
-        <div className='main'>
-          <Sidebar />
-          <div className='content'>
-            <Breadcrumb
-              style={{
-                margin: '5px 0px',
-                padding: '5px',
-                backgroundColor: '#f3f3f3',
-                borderRadius: ' 5px',
-              }}
-            >
-              <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-              <Breadcrumb.Item>S&T</Breadcrumb.Item>
-            </Breadcrumb>
-            {children}
-          </div>
-        </div>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className='layout'>
+                <Header />
+                <div className='main'>
+                    <Sidebar />
+                    <div className='content'>
+                        <Breadcrumb
+                            style={{
+                                margin: '5px 0px',
+                                padding: '5px',
+                                backgroundColor: '#f3f3f3',
+                                borderRadius: ' 5px',
+                            }}
+                        >
+                            <Breadcrumb.Item>Trang chủ</Breadcrumb.Item>
+                            <Breadcrumb.Item>Danh sách học viên</Breadcrumb.Item>
+                        </Breadcrumb>
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default Layouts;

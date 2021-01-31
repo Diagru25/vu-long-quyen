@@ -38,16 +38,23 @@ const DynamicContactNote = ({ data }) => {
                                         align='baseline'
                                     >
                                         <Form.Item
-                                            label='Tên người thân'
-                                            name={[field.name, 'parentName']}
-                                            noStyle
+                                        //label='Tên người thân'
+                                        //noStyle
                                         >
-                                            <Input name='parentName' placeholder='Tên người thân' onChange={(e) => handleOnChange(e, index)} />
+                                            <Input
+                                                name='parentName'
+                                                value={typeof (data[index].parentName) !== 'undefined' ? data[index].parentName : ''}
+                                                placeholder='Tên người thân'
+                                                onChange={(e) => handleOnChange(e, index)}
+                                            />
                                         </Form.Item>
-                                        <Form.Item
-                                            name={[field.name, 'parentPhone']}
-                                        >
-                                            <Input name='parentPhone' placeholder='Số điện thoại' onChange={(e) => handleOnChange(e, index)} />
+                                        <Form.Item>
+                                            <Input
+                                                name='parentPhone'
+                                                value={typeof (data[index].parentPhone) !== 'undefined' ? data[index].parentPhone : ''}
+                                                placeholder='Số điện thoại'
+                                                onChange={(e) => handleOnChange(e, index)}
+                                            />
                                         </Form.Item>
 
                                         <MinusCircleOutlined

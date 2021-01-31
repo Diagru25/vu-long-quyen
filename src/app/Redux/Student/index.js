@@ -4,6 +4,7 @@ export {
     setDefaultStudent,
     getStudentForPage,
     updateCurrentStudent,
-    updateState
+    updateState,
+    setCurrentStudent
 
 } from './StudentSlice';
