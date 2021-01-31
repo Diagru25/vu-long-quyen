@@ -13,10 +13,12 @@ import {
 } from 'src/Redux/Student';
 
 import StudentModal from 'shared/modals/StudentModal';
+
 import { SORT } from 'helper/models';
 
-const StudentActions = () => {
+const { Option } = Select;
 
+const StudentActions = () => {
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState('');
@@ -38,22 +40,36 @@ const StudentActions = () => {
         dispatch(addStudent());
         setIsVisible(false);
     };
+
+    const handleFilter = (value) => {
+        console.log(`selected ${value}`);
+    };
+
     return (
         <div className='actions'>
+            <Select placeholder='Sắp xếp' onChange={value => handleFilter(value)}>
+                <Option value='1'>Tên</Option>
+                <Option value='2'>Tuổi</Option>
+            </Select>
+            <Input placeholder='Search student...' style={{ margin: '0  15px' }} />
             <Button type='primary' onClick={showStudentModal}>
                 Thêm mới
-                </Button>
-            <Input placeholder='Search student...' style={{ margin: '0  15px' }} />
+            </Button>
             <StudentModal
                 isVisible={isVisible}
                 title={title}
                 handleCancel={handleCancel}
                 footer={[
-                    <Button key='btn1' type='default' onClick={handleCancel}>Hủy</Button>,
-                    <Button key='btn2' type='primary' onClick={handleOK}>Thêm mới</Button>
+                    <Button key='btn1' type='default' onClick={handleCancel}>
+                        Hủy
+                    </Button>,
+                    <Button key='btn2' type='primary' onClick={handleOK}>
+                        Lưu
+                    </Button>,
                 ]}
             />
         </div>
     );
+>>>>>>> 407c1c14e0deaba814d5b2bdc46a2d5d05bfa5fd
 };
 export default StudentActions;
