@@ -58,7 +58,7 @@ const ListStudents = () => {
                     </Button>
                     <Button
                         type='default'
-                        style={{ color: 'red', marginLeft: '10px' }}
+                        style={{ color: 'red', margin: '5px' }}
                         onClick={() => dispatch(deleteStudent(record.key))}
                     >
                         Xóa
