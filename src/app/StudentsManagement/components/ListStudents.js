@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     fetchAllStudents,
     getStudentForPage,
-    updateState,
     deleteStudent,
     updateStudent,
     setCurrentStudent,

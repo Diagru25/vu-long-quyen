@@ -23,8 +23,6 @@ const studentDefault = {
     contactNote: [], //{parentName: '', parentPhone: ''}
 };
 
-const regexSplit = `/[\s,]+/`;
-
 const StudentSlice = createSlice({
     name: 'student',
     initialState: {
