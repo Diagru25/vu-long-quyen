@@ -2,7 +2,7 @@ import './StudentActions.scss';
 
 import { Input, Button, Select } from 'adapters/ant-design';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { moment } from 'adapters/moment';
 
 import { useDispatch } from 'react-redux';
@@ -16,14 +16,23 @@ import {
 import StudentModal from 'shared/modals/StudentModal';
 
 import { SORT } from 'helper/models';
+import { fetchAllStudents } from 'app/Redux/Student';
 
 const { Option } = Select;
 
 const StudentActions = () => {
     const dispatch = useDispatch();
 
+    const [txtSearch, setTxtSearch] = useState('');
     const [title, setTitle] = useState('');
     const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        let timeout = setTimeout(() => {
+            dispatch(fetchAllStudents(txtSearch));
+        }, 300);
+        return () => clearTimeout(timeout)
+    }, [txtSearch])
 
     const showStudentModal = () => {
         setTitle(`Tạo mớI học viên`);
@@ -55,7 +64,12 @@ const StudentActions = () => {
                     </Option>
                 )}
             </Select>
-            <Input placeholder='Search student...' style={{ margin: '0  15px' }} />
+            <Input
+                placeholder='Tìm kiếm theo tên...'
+                style={{ margin: '0  15px' }}
+                value={txtSearch.text}
+                onChange={e => setTxtSearch(e.target.value)}
+            />
             <Button type='primary' onClick={showStudentModal}>
                 Thêm mới
             </Button>

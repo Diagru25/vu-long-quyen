@@ -3,18 +3,26 @@ import { studentServices } from 'helper/services/services';
 
 const fetchAllStudents = createAsyncThunk(
     'student/getAll',
-    async () => {
+    async (txtSearch = '') => {
 
         let snapShot = await studentServices.getAllStudents();
         let data = [];
-        let total = snapShot.numChildren();
+        let total = 0;
 
+        console.log(txtSearch);
         snapShot.forEach((child) => {
             let key = child.key;
             let val = child.val();
-            data.push({ ...val, key });
+            if (txtSearch !== '') {
+                if (val.name.toUpperCase().includes(txtSearch.toUpperCase()))
+                    data.push({ ...val, key })
+            }
+            else
+                data.push({ ...val, key });
         })
 
+
+        total = data.length;
         console.log('total: ', total);
         return { data, total }
     }

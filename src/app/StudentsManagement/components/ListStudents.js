@@ -118,7 +118,7 @@ const ListStudents = () => {
                     ),
                     rowExpandable: (record) => record.name !== 'Not Expandable',
                 }}
-                dataSource={currentList.map((student, index) => { return { ...student, stt: index + 1 } })}
+                dataSource={currentList.map((student, index) => { return { ...student, stt: index + pageSize * (pageIndex - 1) + 1 } })}
             >
             </Table>
             <StudentModal
