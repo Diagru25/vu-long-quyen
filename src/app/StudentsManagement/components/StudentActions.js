@@ -29,7 +29,7 @@ const StudentActions = () => {
 
     useEffect(() => {
         let timeout = setTimeout(() => {
-            dispatch(fetchAllStudents(txtSearch));
+            //dispatch(fetchAllStudents(txtSearch));
         }, 300);
         return () => clearTimeout(timeout)
     }, [txtSearch])
