@@ -2,6 +2,7 @@ import './Sidebar.scss';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     const { isShowSideBar } = useSelector((state) => state.menuReducer);
@@ -10,16 +11,22 @@ const Sidebar = () => {
         <div className={isShowSideBar ? 'sidebar' : 'sidebar-hidden'}>
             <ul className='left-menu'>
                 <li>
-                    <div className='items'>
-                        <i className='fas fa-home'></i>
-                        <span>Inbox</span>
-                    </div>
+                    <Link to='/list'>
+                        <div className='items'>
+                            <i className="fas fa-list-ol"></i>
+                            <span>Danh sách học viên</span>
+                        </div>
+                    </Link>
+
                 </li>
                 <li>
-                    <div className='items'>
-                        <i className='fas fa-cog'></i>
-                        <span>Inbox</span>
-                    </div>
+                    <Link to='dashboard'>
+                        <div className='items'>
+                            <i className="fas fa-chart-pie"></i>
+                            <span>Thống kê</span>
+                        </div>
+                    </Link>
+
                 </li>
             </ul>
         </div>

@@ -24,6 +24,11 @@
   }
 }
 
+.items {
+  display: flex;
+  align-items: center;
+}
+
 .sidebar-hidden {
   width: 0;
   opacity: 0;

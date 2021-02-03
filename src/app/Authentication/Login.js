@@ -1,17 +1,31 @@
 import './Login.scss';
 import { Input, Button } from 'adapters/ant-design';
 
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
+import firebase from 'helper/firebaseConfig';
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const { isLoggedIn } = useSelector(state => state.authReducer);
 
-    const { user } = useSelector(state => state.authReducer);
+    const [text, setText] = useState({ email: '', pass: '' });
 
-    if (user) {
-        <Redirect to='/' />
+    const onSignIn = () => {
+        firebase.auth.signInWithEmailAndPassword(text.email, text.pass)
+            .then((userCredential) => {
+                //dispatch(setIsLoggedIn(true));
+            })
+            .catch((error) => {
+                console.log(error.message);
+                //dispatch(setIsLoggedIn(false));
+            });
     }
 
+    if (isLoggedIn === true) {
+        return <Redirect to='/' />
+    }
 
     return (
         <div className='login-wrapper'>
@@ -23,14 +37,14 @@ const Login = () => {
                 <div className="box-login">
                     <div className="item">
                         <p>Email</p>
-                        <Input type='email' placeholder='email@gmail.com' />
+                        <Input type='email' placeholder='email@gmail.com' value={text.email} onChange={(e) => setText({ ...text, email: e.target.value })} />
                     </div>
                     <div className="item">
                         <p>Mật khẩu</p>
-                        <Input type='password' placeholder='Nhập mật khẩu' />
+                        <Input type='password' placeholder='Nhập mật khẩu' value={text.pass} onChange={(e) => setText({ ...text, pass: e.target.value })} />
                     </div>
                     <div className="item">
-                        <Button type='primary'>Đăng nhập</Button>
+                        <Button type='primary' onClick={onSignIn}>Đăng nhập</Button>
                     </div>
                 </div>
                 <div className="box-register">
@@ -41,4 +55,4 @@ const Login = () => {
     )
 };
 
-export default Login;
+export default withRouter(Login);
