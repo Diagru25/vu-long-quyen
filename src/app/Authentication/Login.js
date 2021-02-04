@@ -2,12 +2,11 @@ import './Login.scss';
 import { Input, Button } from 'adapters/ant-design';
 
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import firebase from 'helper/firebaseConfig';
 
 const Login = () => {
-    const dispatch = useDispatch();
     const { isLoggedIn } = useSelector(state => state.authReducer);
 
     const [text, setText] = useState({ email: '', pass: '' });
@@ -15,11 +14,9 @@ const Login = () => {
     const onSignIn = () => {
         firebase.auth.signInWithEmailAndPassword(text.email, text.pass)
             .then((userCredential) => {
-                //dispatch(setIsLoggedIn(true));
             })
             .catch((error) => {
                 console.log(error.message);
-                //dispatch(setIsLoggedIn(false));
             });
     }
 

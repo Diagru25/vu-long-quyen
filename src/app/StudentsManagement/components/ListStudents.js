@@ -13,7 +13,6 @@ import {
     from 'src/Redux/Student';
 
 import StudentModal from 'shared/modals/StudentModal';
-import { Link } from 'react-router-dom';
 
 const ListStudents = () => {
 

@@ -1,0 +1,11 @@
+.card-content {
+  display: flex;
+  margin: 20px 20px;
+  align-items: center;
+  justify-content: center;
+  .card-item {
+    flex: 1;
+    margin: 10px;
+    width: 80%;
+  }
+}

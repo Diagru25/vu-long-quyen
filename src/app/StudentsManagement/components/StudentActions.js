@@ -29,10 +29,10 @@ const StudentActions = () => {
 
     useEffect(() => {
         let timeout = setTimeout(() => {
-            //dispatch(fetchAllStudents(txtSearch));
+            dispatch(fetchAllStudents(txtSearch));
         }, 300);
         return () => clearTimeout(timeout)
-    }, [txtSearch])
+    }, [dispatch, txtSearch])
 
     const showStudentModal = () => {
         setTitle(`Tạo mớI học viên`);

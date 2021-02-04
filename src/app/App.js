@@ -34,7 +34,8 @@ const MainApp = () => {
                 dispatch(setLoggedIn(false))
             }
         });
-    }, [])
+        // note dependence dispatch
+    }, [dispatch])
 
     if (isLoggedIn === false) {
         return (
