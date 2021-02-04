@@ -4,7 +4,7 @@ import { createSlice } from 'adapters/redux-toolkit';
 const authReducer = createSlice({
     name: 'auth',
     initialState: {
-        isLoggedIn: false,
+        isLoggedIn: true,
         user: null,
     },
     reducers: {
