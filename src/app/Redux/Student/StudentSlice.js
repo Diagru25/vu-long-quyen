@@ -121,6 +121,8 @@ const StudentSlice = createSlice({
         builder.addCase(addStudent.fulfilled, (state, action) => {
             state.list.push({ ...state.currentStudent, key: action.payload.key });
             state.total += 1;
+            state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+
 
             state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
@@ -133,6 +135,7 @@ const StudentSlice = createSlice({
                 (student) => student.key === state.currentStudent.key
             );
             state.list[foundIndex] = state.currentStudent;
+            state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
 
             state.currentStudent = studentDefault;
 
