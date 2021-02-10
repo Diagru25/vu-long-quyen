@@ -6,7 +6,7 @@ import React from 'react';
 import Header from 'shared/layouts/Header/Header';
 import Sidebar from 'shared/layouts/Sidebar/Sidebar';
 
-const Layouts = ({ children }) => {
+const Layouts = ({ children, text }) => {
     return (
         <>
             <div className='layout'>
@@ -23,7 +23,7 @@ const Layouts = ({ children }) => {
                             }}
                         >
                             <Breadcrumb.Item>Trang chủ</Breadcrumb.Item>
-                            <Breadcrumb.Item>Danh sách học viên</Breadcrumb.Item>
+                            <Breadcrumb.Item>{text}</Breadcrumb.Item>
                         </Breadcrumb>
                         {children}
                     </div>

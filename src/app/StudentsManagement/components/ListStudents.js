@@ -74,9 +74,9 @@ const ListStudents = () => {
     const [title, setTitle] = useState('');
     const [isVisible, setIsVisible] = useState(false);
 
-    useEffect(() => {
-        dispatch(fetchAllStudents());
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(fetchAllStudents());
+    // }, [dispatch])
 
     const showStudentModal = () => {
         setTitle(`Chi tiết học viên`);

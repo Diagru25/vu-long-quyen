@@ -9,7 +9,6 @@ const fetchAllStudents = createAsyncThunk(
         let data = [];
         let total = 0;
 
-        console.log(txtSearch);
         snapShot.forEach((child) => {
             let key = child.key;
             let val = child.val();
@@ -23,7 +22,7 @@ const fetchAllStudents = createAsyncThunk(
 
 
         total = data.length;
-        console.log('total: ', total);
+
         return { data, total }
     }
 )

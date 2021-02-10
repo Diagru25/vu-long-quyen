@@ -7,22 +7,7 @@ import {
     deleteStudent,
 } from './studentAction';
 
-
-const getFirstName = (s) => {
-    let pieces = s.split(/[\s,]+/);
-    return pieces[pieces.length - 1].toUpperCase();
-}
-
-const getFromTo = (arr, pageIndex, pageSize) => {
-    let result = [];
-    let from = pageSize * (pageIndex - 1);
-    let to = pageSize * pageIndex;
-    arr.forEach((child, index) => {
-        if (index >= from && index < to)
-            result.push(child);
-    })
-    return result;
-}
+import { getFromTo, getFirstName } from 'helper/functions';
 
 const studentDefault = {
     key: null,
@@ -123,7 +108,6 @@ const StudentSlice = createSlice({
             state.total += 1;
             state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
 
-
             state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
             state.currentStudent = studentDefault;
@@ -135,7 +119,9 @@ const StudentSlice = createSlice({
                 (student) => student.key === state.currentStudent.key
             );
             state.list[foundIndex] = state.currentStudent;
+
             state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+            state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
             state.currentStudent = studentDefault;
 

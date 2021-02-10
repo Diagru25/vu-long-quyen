@@ -90,6 +90,7 @@ export const FormStudent = () => {
                     placeholder='Chọn tháng kích hoạt'
                     allowClear
                     mode='multiple'
+                    value={currentStudent.months}
                     onChange={(value) =>
                         dispatch(updateCurrentStudent({ months: value }))
                     }

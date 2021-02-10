@@ -10,7 +10,7 @@ import StudentActions from './components/StudentActions';
 const StudentsManagement = () => {
     return (
         <Fragment>
-            <Layouts>
+            <Layouts text='Danh sách võ sinh'>
                 <StudentActions />
                 <ListStudents />
             </Layouts>
