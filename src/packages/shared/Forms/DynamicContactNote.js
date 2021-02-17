@@ -43,7 +43,7 @@ const DynamicContactNote = ({ data }) => {
                                         >
                                             <Input
                                                 name='parentName'
-                                                value={typeof (data[index].parentName) !== 'undefined' ? data[index].parentName : ''}
+                                                value={typeof (data[index]) !== 'undefined' ? data[index].parentName : ''}
                                                 placeholder='Tên người thân'
                                                 onChange={(e) => handleOnChange(e, index)}
                                             />
@@ -51,7 +51,7 @@ const DynamicContactNote = ({ data }) => {
                                         <Form.Item>
                                             <Input
                                                 name='parentPhone'
-                                                value={typeof (data[index].parentPhone) !== 'undefined' ? data[index].parentPhone : ''}
+                                                value={typeof (data[index]) !== 'undefined' ? data[index].parentPhone : ''}
                                                 placeholder='Số điện thoại'
                                                 onChange={(e) => handleOnChange(e, index)}
                                             />

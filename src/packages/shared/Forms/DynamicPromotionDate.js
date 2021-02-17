@@ -56,7 +56,7 @@ export const DynamicPromotionDate = ({ data }) => {
                                             <Select
                                                 allowClear
                                                 placeholder='Chọn đai'
-                                                value={typeof (data[index].type) !== 'undefined' ? data[index].type : ''}
+                                                value={typeof (data[index]) !== 'undefined' ? data[index].type : ''}
                                                 onChange={(value) => handleOnChangeSelect(value, index)}
                                             >
                                                 {BELTS.map((belt) => (
@@ -70,7 +70,7 @@ export const DynamicPromotionDate = ({ data }) => {
                                         <Form.Item name={[field.name, 'onDate']}>
                                             <DatePicker
                                                 format='DD-MM-YYYY'
-                                                value={typeof (data[index].onDate) !== 'undefined' ? moment(data[index].onDate, 'DD-MM-YYYY') : null}
+                                                value={typeof (data[index]) !== 'undefined' ? moment(data[index].onDate, 'DD-MM-YYYY') : null}
                                                 onChange={(date, dateString, index) =>
                                                     handleOnChangeDate(date, dateString, index)
                                                 }
