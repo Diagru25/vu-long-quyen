@@ -5,6 +5,7 @@ import React, { Fragment } from 'react';
 import { toggleSideBar } from 'src/Redux/Menu';
 import { useDispatch } from 'react-redux';
 import firebase from 'helper/firebaseConfig';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,15 @@ const Header = () => {
                         className='fas fa-align-justify'
                         onClick={() => dispatch(toggleSideBar())}
                     ></i>
-                    <i className='fas fa-home'></i>
+                    <Link to='/dashboard'>
+                        <i className='fas fa-home'></i>
+                    </Link>
+                    <Link to='/list' className='left-actions-item'>
+                        <i className='fas fa-list-ol'></i>
+                    </Link>
+                    <Link to='/setting' className='left-actions-item'>
+                        <i className='fas fa-cog'></i>
+                    </Link>
                 </div>
 
                 <div className=''></div>

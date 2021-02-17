@@ -8,6 +8,7 @@
   padding: 0 20px;
 
   i {
+    color: #fff;
     &:hover {
       cursor: pointer;
       background-color: #646464;
@@ -31,4 +32,16 @@
 
 .hidden {
   display: none;
+}
+
+@media (min-width: 768px) {
+  .left-actions-item {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-actions > :first-child {
+    display: none;
+  }
 }

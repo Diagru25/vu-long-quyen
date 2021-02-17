@@ -1,6 +1,8 @@
 import { createAsyncThunk } from 'adapters/redux-toolkit';
 import { studentServices } from 'helper/services/services';
 
+import { moment } from 'adapters/moment';
+
 const fetchData = createAsyncThunk(
     'statistic/fetchData',
     async () => {
@@ -10,7 +12,7 @@ const fetchData = createAsyncThunk(
         let total = snapShot.numChildren();
         let paid = 0;
         let haveNotPaid = 0;
-        let month = new Date().getMonth().toString();
+        let month = moment().format('M');
 
         snapShot.forEach((child) => {
             let key = child.key;

@@ -11,22 +11,29 @@ const Sidebar = () => {
         <div className={isShowSideBar ? 'sidebar' : 'sidebar-hidden'}>
             <ul className='left-menu'>
                 <li>
+                    <Link to='/dashboard'>
+                        <div className='items'>
+                            <i className="fas fa-chart-pie"></i>
+                            <span>Thống kê</span>
+                        </div>
+                    </Link>
+                </li>
+                <li>
                     <Link to='/list'>
                         <div className='items'>
                             <i className="fas fa-list-ol"></i>
                             <span>Danh sách học viên</span>
                         </div>
                     </Link>
-
                 </li>
+
                 <li>
-                    <Link to='dashboard'>
+                    <Link to='/setting'>
                         <div className='items'>
-                            <i className="fas fa-chart-pie"></i>
-                            <span>Thống kê</span>
+                            <i className="fas fa-cog"></i>
+                            <span>Cài đặt</span>
                         </div>
                     </Link>
-
                 </li>
             </ul>
         </div>

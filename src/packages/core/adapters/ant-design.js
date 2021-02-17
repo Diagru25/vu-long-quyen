@@ -17,7 +17,8 @@ export {
     Collapse,
     Space,
     Pagination,
-    Card
+    Card,
+    List
 } from 'antd';
 
 export { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';

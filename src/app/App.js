@@ -14,7 +14,7 @@ const App = () => {
         <Switch>
             <Route exact path='/list' component={StudentsManagement} />
             <Route exact path='/dashboard' component={Dashboard} />
-            <Redirect exact from='/' to='/list' />
+            <Redirect exact from='/' to='/dashboard' />
         </Switch>
     );
 };

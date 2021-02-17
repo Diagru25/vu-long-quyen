@@ -20,8 +20,61 @@ export const BELTS = [
     },
     {
         beltID: '2',
+        title: 'Đai xanh',
+    },
+    {
+        beltID: '3',
+        title: 'Đai xanh 1 vạch',
+    },
+    {
+        beltID: '4',
+        title: 'Đai xanh 2 vạch',
+    },
+    {
+        beltID: '5',
+        title: 'Đai xanh 3 vạch',
+    },
+    {
+        beltID: '6',
+        title: 'Đai vàng',
+    },
+    {
+        beltID: '7',
+        title: 'Đai vàng 1 vạch',
+    },
+    {
+        beltID: '8',
+        title: 'Đai vàng 2 vạch',
+    },
+    {
+        beltID: '9',
+        title: 'Đai vàng 3 vạch',
+    },
+    {
+        beltID: '10',
+        title: 'Đai đỏ',
+    },
+    {
+        beltID: '11',
+        title: 'Đai đỏ 1 vạch',
+    },
+    {
+        beltID: '12',
+        title: 'Đai đỏ 2 vạch',
+    },
+    {
+        beltID: '13',
+        title: 'Đai đỏ 3 vạch',
+    },
+    {
+        beltID: '14',
         title: 'Đai trắng',
     },
+    {
+        beltID: '15',
+        title: 'Đai trắng có tua',
+    },
+
 ];
 
 export const SORT = [

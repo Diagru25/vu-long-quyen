@@ -1,8 +1,12 @@
 import './DashboardStatistics.scss';
-import React, { useEffect } from 'react';
 
 import { PieChart, Pie, Cell, Legend } from 'adapters/recharts';
+import { List, Checkbox } from 'adapters/ant-design';
+
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { moment } from 'adapters/moment';
 
 import { fetchData } from 'src/Redux/Statistic';
 
@@ -10,7 +14,7 @@ import { fetchData } from 'src/Redux/Statistic';
 const DashboardStatistics = (props) => {
 
     const dispatch = useDispatch();
-    const { paid, haveNotPaid } = useSelector(state => state.statisticReducer);
+    const { paid, haveNotPaid, list, listPaid } = useSelector(state => state.statisticReducer);
 
     useEffect(() => {
         dispatch(fetchData());
@@ -39,7 +43,7 @@ const DashboardStatistics = (props) => {
     return (
         <div className='statistic-content'>
             <div className="chart">
-                <h3>Biểu đồ tháng {new Date().getMonth().toString()}</h3>
+                <h3>Biểu đồ tháng {moment().format("MM")}</h3>
                 <PieChart width={400} height={400}>
                     <Pie
                         data={data}
@@ -65,10 +69,39 @@ const DashboardStatistics = (props) => {
                 </PieChart>
             </div>
             <div className="list">
-                <span>Danh sách võ sinh chưa đóng tiền</span>
+                <h3>Danh sách chưa đóng tiền tháng {moment().format('MM')} ({haveNotPaid})</h3>
+                <List
+                    itemLayout='horizontal'
+                    dataSource={list}
+                    renderItem={item => (
+                        <List.Item>
+                            <List.Item.Meta
+                                avatar={<i className='fas fa-times' style={{ color: '#ff3333' }}></i>}
+                                title={item.name}
+                                description={item.dayOfBirth}
+                            />
+                            <Checkbox />
+                        </List.Item>
+                    )}
+                />
+
             </div>
             <div className="list">
-                <span>Danh sách võ sinh đã đóng tiền</span>
+                <h3>Danh sách đã đóng tiền tháng {moment().format('MM')} ({paid})</h3>
+                <List
+                    itemLayout='horizontal'
+                    dataSource={listPaid}
+                    renderItem={item => (
+                        <List.Item>
+                            <List.Item.Meta
+                                avatar={<i className='fas fa-check' style={{ color: '#4BB543' }}></i>}
+                                title={item.name}
+                                description={item.dayOfBirth}
+                            />
+
+                        </List.Item>
+                    )}
+                />
             </div>
         </div>
     )

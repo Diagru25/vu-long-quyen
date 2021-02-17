@@ -1,9 +1,8 @@
 import { Table, Button } from 'adapters/ant-design';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    fetchAllStudents,
     getStudentForPage,
     deleteStudent,
     updateStudent,
