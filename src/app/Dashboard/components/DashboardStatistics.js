@@ -20,6 +20,8 @@ const DashboardStatistics = (props) => {
         dispatch(fetchData());
     }, [dispatch])
 
+    const curMonth = moment().format('M');
+
     const data = [
         { name: 'Đã đóng', value: paid },
         { name: 'Chưa đóng', value: haveNotPaid },
@@ -43,7 +45,7 @@ const DashboardStatistics = (props) => {
     return (
         <div className='statistic-content'>
             <div className="chart">
-                <h3>Biểu đồ tháng {moment().format("MM")}</h3>
+                <h3>Biểu đồ tháng {curMonth}</h3>
                 <PieChart width={400} height={400}>
                     <Pie
                         data={data}
@@ -69,7 +71,7 @@ const DashboardStatistics = (props) => {
                 </PieChart>
             </div>
             <div className="list">
-                <h3>Danh sách chưa đóng tiền tháng {moment().format('MM')} ({haveNotPaid})</h3>
+                <h3>Danh sách chưa đóng tiền tháng {curMonth} ({haveNotPaid}))</h3>
                 <List
                     itemLayout='horizontal'
                     dataSource={list}
@@ -87,7 +89,7 @@ const DashboardStatistics = (props) => {
 
             </div>
             <div className="list">
-                <h3>Danh sách đã đóng tiền tháng {moment().format('MM')} ({paid})</h3>
+                <h3>Danh sách đã đóng tiền tháng {curMonth} ({paid})</h3>
                 <List
                     itemLayout='horizontal'
                     dataSource={listPaid}
