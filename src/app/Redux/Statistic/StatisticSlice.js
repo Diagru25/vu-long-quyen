@@ -1,5 +1,5 @@
 import { createSlice } from 'adapters/redux-toolkit';
-import { fetchData } from './statisticAction';
+import { fetchData, updateStudent } from './statisticAction';
 
 import { calIncome, getFirstName } from 'helper/functions';
 
@@ -26,7 +26,19 @@ const statisticSlice = createSlice({
 
             state.income = calIncome(state.listPaid);
 
+        });
+        builder.addCase((updateStudent.fulfilled), (state, action) => {
+            let foundIndex = state.list.findIndex(element => element.key === action.payload.student.key);
+
+            state.list.splice(foundIndex, 1);
+            state.listPaid.push(action.payload.student);
+            state.listPaid.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+
+            state.paid += 1;
+            state.haveNotPaid -= 1;
+            state.income = calIncome(state.listPaid);
         })
+
     }
 });
 

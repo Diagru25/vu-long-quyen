@@ -49,7 +49,8 @@ const ListStudents = () => {
                 <div>
                     <Button type='default'
                         onClick={() => {
-                            dispatch(setCurrentStudent(record));
+                            let { stt, ...cloneRecord } = record;
+                            dispatch(setCurrentStudent(cloneRecord));
                             showStudentModal();
                         }}
                     >

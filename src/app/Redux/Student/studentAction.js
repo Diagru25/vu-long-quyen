@@ -50,7 +50,7 @@ const updateStudent = createAsyncThunk(
             await studentServices.updateStudent(currentStudent);
         }
         catch (ex) {
-            console.log(ex);
+            console.log('thunk: ', ex);
         }
     }
 )

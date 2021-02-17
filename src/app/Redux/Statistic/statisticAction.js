@@ -6,6 +6,7 @@ import { moment } from 'adapters/moment';
 const fetchData = createAsyncThunk(
     'statistic/fetchData',
     async () => {
+
         let snapShot = await studentServices.getAllStudents();
         let list = [];
         let listPaid = [];
@@ -38,4 +39,17 @@ const fetchData = createAsyncThunk(
     }
 )
 
-export { fetchData }
+const updateStudent = createAsyncThunk(
+    'statistic/updateStudent',
+    async (student) => {
+        try {
+            await studentServices.updateStudent(student);
+            return { student };
+        }
+        catch (ex) {
+            console.log('thunk statistic: ', ex);
+        }
+    }
+)
+
+export { fetchData, updateStudent }

@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { moment } from 'adapters/moment';
 
-import { fetchData } from 'src/Redux/Statistic';
+import { fetchData, updateStudent } from 'src/Redux/Statistic';
 
 
 const DashboardStatistics = (props) => {
@@ -42,6 +42,12 @@ const DashboardStatistics = (props) => {
         );
     };
 
+    const handleCheckPaid = (student) => {
+        let months = typeof (student.months) !== 'undefined' ? [...student.months] : [];
+        months.push(moment().format('M'));
+        dispatch(updateStudent({ ...student, months }));
+    }
+
     return (
         <div className='statistic-content'>
             <div className="chart">
@@ -71,18 +77,20 @@ const DashboardStatistics = (props) => {
                 </PieChart>
             </div>
             <div className="list">
-                <h3>Danh sách chưa đóng tiền tháng {curMonth} ({haveNotPaid}))</h3>
+                <h3>Danh sách chưa đóng tiền tháng {curMonth} ({haveNotPaid})</h3>
                 <List
                     itemLayout='horizontal'
                     dataSource={list}
                     renderItem={item => (
-                        <List.Item>
+                        <List.Item key={item.key}>
                             <List.Item.Meta
                                 avatar={<i className='fas fa-times' style={{ color: '#ff3333' }}></i>}
                                 title={item.name}
                                 description={item.dayOfBirth}
                             />
-                            <Checkbox />
+                            <Checkbox
+                                onClick={() => handleCheckPaid(item)}
+                            />
                         </List.Item>
                     )}
                 />

@@ -9,9 +9,10 @@ export default function DashboardCard() {
 
     const { total, income } = useSelector(state => state.statisticReducer);
 
-    const fncWithCommas = (num) => {
+    const numberWithCommas = (num) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " vnđ";
     }
+
     return (
         <div className='card-content'>
             <Card title='Tổng số võ sinh' bordered={true} className='card-item'>
@@ -20,9 +21,9 @@ export default function DashboardCard() {
                     description={'Tính đến: ' + moment().format('DD-MM-YYYY')}
                 />
             </Card>
-            <Card title={'Tổng thu tháng ' + moment().format('M')} bordered={true} className='card-item'>
+            <Card title='Tổng thu' bordered={true} className='card-item'>
                 <Card.Meta
-                    title={fncWithCommas(income)}
+                    title={numberWithCommas(income)}
                     description={'Tính đến: ' + moment().format('DD-MM-YYYY')}
                 />
             </Card>
