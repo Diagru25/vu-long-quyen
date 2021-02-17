@@ -61,6 +61,7 @@ export const FormStudent = () => {
                 <Select
                     placeholder='Chọn đai'
                     allowClear
+                    defaultValue={1}
                     value={currentStudent.beltID}
                     onChange={(value) =>
                         dispatch(updateCurrentStudent({ beltID: value }))
