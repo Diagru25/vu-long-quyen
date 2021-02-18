@@ -1,5 +1,5 @@
 import './Login.scss';
-import { Input, Button } from 'adapters/ant-design';
+import { Input, Button, message } from 'adapters/ant-design';
 
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -12,8 +12,11 @@ const Login = () => {
     const [text, setText] = useState({ email: '', pass: '' });
 
     const onSignIn = () => {
-        firebase.auth.signInWithEmailAndPassword(text.email, text.pass)
+        let email = text.email.includes('@gmail.com') ? text.email : `${text.email}@gmail.com`;
+
+        firebase.auth.signInWithEmailAndPassword(email, text.pass)
             .then((userCredential) => {
+                message.success('Đăng nhập thành công');
             })
             .catch((error) => {
                 console.log(error.message);
