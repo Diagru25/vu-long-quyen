@@ -52,10 +52,10 @@ export const DynamicPromotionDate = ({ data }) => {
                                         style={{ display: 'flex' }}
                                         align='baseline'
                                     >
-                                        <Form.Item>
+                                        <Form.Item name={[field.name, 'type']}>
                                             <Select
                                                 allowClear
-                                                placeholder='Chọn đai'
+                                                placeholder='Chọn bậc đai đã lên'
                                                 value={typeof (data[index]) !== 'undefined' ? data[index].type : ''}
                                                 onChange={(value) => handleOnChangeSelect(value, index)}
                                             >
@@ -67,11 +67,12 @@ export const DynamicPromotionDate = ({ data }) => {
                                             </Select>
                                         </Form.Item>
 
-                                        <Form.Item name={[field.name, 'onDate']}>
+                                        <Form.Item name={[field.name, 'onDate']} >
                                             <DatePicker
+                                                placeholder='Ngày lên đai'
                                                 format='DD-MM-YYYY'
                                                 value={typeof (data[index]) !== 'undefined' ? moment(data[index].onDate, 'DD-MM-YYYY') : null}
-                                                onChange={(date, dateString, index) =>
+                                                onChange={(date, dateString) =>
                                                     handleOnChangeDate(date, dateString, index)
                                                 }
                                             />
@@ -91,9 +92,10 @@ export const DynamicPromotionDate = ({ data }) => {
                                 <Button
                                     type='dashed'
                                     onClick={() => {
-                                        let promotionDate = [...data];
+                                        let promotionDate = typeof (data) !== 'undefined' ? [...data] : [];
+
                                         promotionDate.push({ type: '', onDate: '' });
-                                        dispatch(updateCurrentStudent({ promotionDate }));
+                                        dispatch(updateCurrentStudent({ promotionDate: promotionDate }));
                                         add();
                                     }}
                                     style={{ width: '100%' }}

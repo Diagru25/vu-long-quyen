@@ -1,0 +1,25 @@
+.expand-content {
+  padding: 5px 40px;
+  .expand-item {
+    padding: 5px 0px;
+    font-size: 1rem;
+    > span:first-child {
+      font-weight: bold;
+    }
+    &:first-child {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .expand-content {
+    padding: 0px 20px;
+    .expand-item {
+      font-size: small;
+      &:first-child {
+        display: block;
+      }
+    }
+  }
+}

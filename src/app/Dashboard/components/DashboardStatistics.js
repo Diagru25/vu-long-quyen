@@ -108,7 +108,6 @@ const DashboardStatistics = (props) => {
                                 title={item.name}
                                 description={item.dayOfBirth}
                             />
-
                         </List.Item>
                     )}
                 />

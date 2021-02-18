@@ -1,3 +1,4 @@
+import './ListStudent.scss';
 import { Table, Button } from 'adapters/ant-design';
 
 import { useState } from 'react';
@@ -10,6 +11,8 @@ import {
     setDefaultStudent
 }
     from 'src/Redux/Student';
+
+import { BELTS } from 'helper/models';
 
 import StudentModal from 'shared/modals/StudentModal';
 
@@ -39,7 +42,8 @@ const ListStudents = () => {
             title: 'Địa chỉ',
             dataIndex: 'address',
             key: 'address',
-            align: 'center'
+            align: 'center',
+            responsive: ['md']
         },
         {
             title: 'Thao tác',
@@ -114,7 +118,52 @@ const ListStudents = () => {
                 }}
                 expandable={{
                     expandedRowRender: (record) => (
-                        <p style={{ margin: 0 }}>{record.description}</p>
+                        <div className="expand-content">
+                            <div className="expand-item">
+                                <span>Địa chỉ : </span>
+                                <span>{record.address}</span>
+                            </div>
+                            <div className="expand-item">
+                                <span>Cấp bậc : </span>
+                                <span>{BELTS.find(element => element.beltID === record.beltID).title}</span>
+                            </div>
+                            <div className="expand-item">
+                                <span>Phụ huynh : </span>
+                                <span>
+                                    {
+                                        typeof (record.contactNote) !== 'undefined'
+                                            ?
+                                            record.contactNote.map(element => `${element.parentName} - ${element.parentPhone} |`)
+                                            :
+                                            ''
+                                    }
+                                </span>
+                            </div>
+                            <div className="expand-item">
+                                <span>Các tháng đóng học : </span>
+                                <span>
+                                    {
+                                        typeof (record.months) !== 'undefined'
+                                            ?
+                                            record.months.map(element => `${element} `)
+                                            :
+                                            ''
+                                    }
+                                </span>
+                            </div>
+                            <div className="expand-item">
+                                <span>Ngày thăng đai : </span>
+                                <span>
+                                    {
+                                        typeof (record.promotionDate) !== 'undefined'
+                                            ?
+                                            record.promotionDate.map(element => `${element.onDate} ➟ ${BELTS.find(belt => belt.beltID === element.type).title} |`)
+                                            :
+                                            ''
+                                    }
+                                </span>
+                            </div>
+                        </div>
                     ),
                     rowExpandable: (record) => record.name !== 'Not Expandable',
                 }}

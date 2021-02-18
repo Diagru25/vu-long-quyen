@@ -79,9 +79,9 @@ export const BELTS = [
 
 export const SORT = [
     { value: 'nameDes', title: 'Tên A ➟ Z' },
-    { value: 'nameInc', title: 'Tên Z ➟ A' },
-    { value: 'dateDes', title: 'Ngày sinh ➘' },
-    { value: 'dateInc', title: 'Ngày sinh ➚' }
+    { value: 'nameInc', title: 'Tên Z ➟ A' }
+    // { value: 'dateDes', title: 'Ngày sinh ➘' },
+    // { value: 'dateInc', title: 'Ngày sinh ➚' }
 ]
 
 export const MOCK_USER = {

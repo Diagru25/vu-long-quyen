@@ -39,6 +39,7 @@ export const FormStudent = () => {
 
             <Form.Item label='Ngày sinh'>
                 <DatePicker
+                    placeholder='Ngày sinh'
                     format='DD-MM-YYYY'
                     value={moment(currentStudent.dayOfBirth, 'DD-MM-YYYY').isValid() ? moment(currentStudent.dayOfBirth, 'DD-MM-YYYY') : null}
                     onChange={(date, dateString) =>
@@ -61,7 +62,7 @@ export const FormStudent = () => {
                 <Select
                     placeholder='Chọn đai'
                     allowClear
-                    defaultValue={1}
+                    defaultValue='1'
                     value={currentStudent.beltID}
                     onChange={(value) =>
                         dispatch(updateCurrentStudent({ beltID: value }))

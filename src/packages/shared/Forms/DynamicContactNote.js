@@ -17,7 +17,7 @@ const DynamicContactNote = ({ data }) => {
         if (name === 'parentName')
             prvElement = { ...prvElement, parentName: value };
         else
-            prvElement = { ...prvElement, parentPhone: value }
+            prvElement = { ...prvElement, parentPhone: value };
 
         contactNote[index] = { ...prvElement };
 
@@ -59,7 +59,7 @@ const DynamicContactNote = ({ data }) => {
 
                                         <MinusCircleOutlined
                                             onClick={() => {
-                                                let contactNote = [...data];
+                                                let contactNote = typeof (data) !== 'undefined' ? [...data] : [];
                                                 contactNote.splice(index, 1);
                                                 dispatch(updateCurrentStudent({ contactNote }));
                                                 remove(field.name);
