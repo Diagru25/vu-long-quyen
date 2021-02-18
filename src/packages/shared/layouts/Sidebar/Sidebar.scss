@@ -18,7 +18,7 @@
       &:hover {
         cursor: pointer;
         background: #ffffff;
-        color: #1890ff;
+        color: rgb(0, 136, 254);
       }
     }
   }
@@ -36,6 +36,11 @@
   transition: all 0.5s ease-in-out;
   animation-name: hidden;
   animation-duration: 0.5s;
+}
+
+.activated {
+  color: rgb(255, 128, 66);
+  font-weight: bold;
 }
 
 @keyframes show {
