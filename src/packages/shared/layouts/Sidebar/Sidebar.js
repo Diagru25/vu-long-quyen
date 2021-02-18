@@ -2,7 +2,7 @@ import './Sidebar.scss';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   const { isShowSideBar } = useSelector((state) => state.menuReducer);
