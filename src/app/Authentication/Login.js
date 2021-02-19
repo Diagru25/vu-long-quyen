@@ -27,7 +27,16 @@ const Login = () => {
                 message.success('Đăng nhập thành công');
             })
             .catch((error) => {
-                console.log(error.message);
+                switch (error.code) {
+                    case 'auth/wrong-password':
+                        message.error('Sai mật khẩu');
+                        break;
+                    case 'auth/user-not-found':
+                        message.error('Tài khoản không tồn tại');
+                        break;
+                    default:
+                        break;
+                }
                 setPending(false);
             });
 
