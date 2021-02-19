@@ -107,7 +107,7 @@ export const FormStudent = () => {
 
             <DynamicContactNote data={currentStudent.contactNote} />
 
-            <DynamicPromotionDate data={currentStudent.promotionDate} />
+            <DynamicPromotionDate data={currentStudent.promotionDate} curBeltID={currentStudent.beltID} />
         </Form>
     );
 };
