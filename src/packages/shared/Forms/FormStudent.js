@@ -94,7 +94,7 @@ export const FormStudent = () => {
                     mode='multiple'
                     value={currentStudent.months}
                     onChange={(value) =>
-                        dispatch(updateCurrentStudent({ months: value }))
+                        dispatch(updateCurrentStudent({ months: value.sort((a, b) => a - b) }))
                     }
                 >
                     {MONTHSOFYEAR.map((month) => (

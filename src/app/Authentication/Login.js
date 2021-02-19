@@ -1,26 +1,36 @@
 import './Login.scss';
 import { Input, Button, message } from 'adapters/ant-design';
+import {
+    LoadingOutlined,
+} from '@ant-design/icons';
 
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import firebase from 'helper/firebaseConfig';
 
+
+
 const Login = () => {
     const { isLoggedIn } = useSelector(state => state.authReducer);
 
     const [text, setText] = useState({ email: '', pass: '' });
+    const [pending, setPending] = useState(false);
 
     const onSignIn = () => {
+        setPending(true);
         let email = text.email.includes('@gmail.com') ? text.email : `${text.email}@gmail.com`;
 
         firebase.auth.signInWithEmailAndPassword(email, text.pass)
             .then((userCredential) => {
+                setPending(false);
                 message.success('Đăng nhập thành công');
             })
             .catch((error) => {
                 console.log(error.message);
+                setPending(false);
             });
+
     }
 
     if (isLoggedIn === true) {
@@ -44,7 +54,7 @@ const Login = () => {
                         <Input type='password' placeholder='Nhập mật khẩu' value={text.pass} onChange={(e) => setText({ ...text, pass: e.target.value })} />
                     </div>
                     <div className="item">
-                        <Button type='primary' onClick={onSignIn}>Đăng nhập</Button>
+                        <Button type='primary' onClick={onSignIn} icon={pending ? <LoadingOutlined /> : null}>Đăng nhập</Button>
                     </div>
                 </div>
                 <div className="box-register">

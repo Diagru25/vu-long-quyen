@@ -29,6 +29,8 @@ export const DynamicPromotionDate = ({ data, curBeltID }) => {
 
         promotionDate[index] = { ...prvElement, type: value };
 
+        promotionDate.sort((a, b) => a.type - b.type);
+
         value > curBeltID
             ?
             dispatch(updateCurrentStudent({ promotionDate, beltID: value }))

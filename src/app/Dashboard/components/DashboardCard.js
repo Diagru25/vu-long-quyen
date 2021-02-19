@@ -21,7 +21,7 @@ export default function DashboardCard() {
                     description={'Tính đến: ' + moment().format('DD-MM-YYYY')}
                 />
             </Card>
-            <Card title='Tổng thu' bordered={true} className='card-item'>
+            <Card title={`Tổng thu ${moment().year()}`} bordered={true} className='card-item'>
                 <Card.Meta
                     title={numberWithCommas(income)}
                     description={'Tính đến: ' + moment().format('DD-MM-YYYY')}

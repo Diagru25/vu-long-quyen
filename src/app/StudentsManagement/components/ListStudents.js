@@ -157,7 +157,7 @@ const ListStudents = () => {
                                     {
                                         typeof (record.promotionDate) !== 'undefined'
                                             ?
-                                            record.promotionDate.map(element => `${element.onDate} ➟ ${BELTS.find(belt => belt.beltID === element.type).title} |`)
+                                            record.promotionDate.map(element => `${element.onDate} ➟ ${BELTS.find(belt => belt.beltID === element.type).title} | `)
                                             :
                                             ''
                                     }

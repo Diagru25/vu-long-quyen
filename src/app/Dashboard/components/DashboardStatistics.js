@@ -44,7 +44,7 @@ const DashboardStatistics = (props) => {
 
     const handleCheckPaid = (student) => {
         let months = typeof (student.months) !== 'undefined' ? [...student.months] : [];
-        months.push(moment().format('M'));
+        months.push(moment().format('M')).sort((a, b) => a - b);
         dispatch(updateStudent({ ...student, months }));
     }
 
