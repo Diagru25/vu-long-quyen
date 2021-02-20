@@ -35,7 +35,7 @@ const MainApp = () => {
     useEffect(() => {
         firebase.auth.onAuthStateChanged(function (user) {
             if (user) {
-                //console.log('check: ', user.email);
+                //console.log('check: ', user);
                 dispatch(setUser({ displayName: user.displayName, photoURL: user.photoURL }));
                 dispatch(setLoggedIn(true));
             } else {

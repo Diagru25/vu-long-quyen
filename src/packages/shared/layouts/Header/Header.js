@@ -41,15 +41,24 @@ const Header = () => {
         <Fragment>
             <div className='container'>
                 <div className='left-actions'>
-                    <i
-                        className='fas fa-align-justify'
-                        onClick={() => dispatch(toggleSideBar())}
-                    ></i>
+                    <Tooltip title='Menu'>
+                        <i
+                            className='fas fa-align-justify'
+                            onClick={() => dispatch(toggleSideBar())}
+                        ></i>
+                    </Tooltip>
+
                     <Link to='/dashboard'>
-                        <i className='fas fa-home'></i>
+                        <Tooltip title='Trang chủ / Thống kê'>
+                            <i className='fas fa-home'></i>
+                        </Tooltip>
+
                     </Link>
                     <Link to='/list' className='left-actions-item'>
-                        <i className='fas fa-list-ol'></i>
+                        <Tooltip title='Danh sách'>
+                            <i className='fas fa-list-ol'></i>
+                        </Tooltip>
+
                     </Link>
                     <Link to='/setting' className='left-actions-item'>
                         <i className='fas fa-cog'></i>
@@ -58,16 +67,16 @@ const Header = () => {
 
                 <div className=''></div>
                 <div className='right-actions'>
-                    <span onClick={onLogout}>
-                        <i className='fas fa-sign-out-alt'></i>
-                    </span>
+                    <Tooltip title='Đăng xuất'>
+                        <span onClick={onLogout}>
+                            <i className='fas fa-sign-out-alt'></i>
+                        </span>
+                    </Tooltip>
                 </div>
 
-                <Link to='/account'>
+                <Link to='/account' style={{ paddingTop: '1px' }}>
                     <Tooltip title={user !== null ? user.displayName : 'User'}>
-
                         {userDisplay}
-
                     </Tooltip>
 
                 </Link>

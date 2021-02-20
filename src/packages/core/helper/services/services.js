@@ -50,4 +50,6 @@ const settingServices = {
     }
 }
 
-export { studentServices, beltServices, settingServices };
+const currentUser = firebase.auth.currentUser;
+
+export { studentServices, beltServices, settingServices, currentUser };
