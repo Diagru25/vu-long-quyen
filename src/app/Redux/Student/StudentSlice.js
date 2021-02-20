@@ -1,3 +1,5 @@
+import { message } from 'adapters/ant-design';
+
 import { createSlice } from 'adapters/redux-toolkit';
 
 import {
@@ -110,9 +112,10 @@ const StudentSlice = createSlice({
 
             state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
+            let name = state.currentStudent.name;
             state.currentStudent = studentDefault;
 
-            console.log('Add success');
+            message.success(`Thêm mới võ sinh "${name}" thành công !`, 3);
         });
         builder.addCase(updateStudent.fulfilled, (state, action) => {
             let foundIndex = state.list.findIndex(
@@ -123,9 +126,10 @@ const StudentSlice = createSlice({
             state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
             state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
+            let name = state.currentStudent.name;
             state.currentStudent = studentDefault;
 
-            console.log('Update success');
+            message.success(`cập nhật võ sinh "${name}" thành công !`, 3);
         });
         builder.addCase(deleteStudent.fulfilled, (state, action) => {
 
@@ -141,9 +145,10 @@ const StudentSlice = createSlice({
                     state.currentList.push(student);
             })
 
+            let name = state.currentStudent.name;
             state.currentStudent = studentDefault;
 
-            console.log('Delete success');
+            message.success(`Xóa võ sinh "${name}" thành công !`, 3);
         });
         builder.addDefaultCase((state, action) => state);
     },

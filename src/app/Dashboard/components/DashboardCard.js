@@ -1,17 +1,14 @@
 import './DashboardCard.scss';
-import React from 'react';
-import { useSelector } from 'react-redux';
 import { Card } from 'adapters/ant-design';
 
+import { useSelector } from 'react-redux';
+
+import { numberWithCommas } from 'helper/functions';
 import { moment } from 'adapters/moment';
 
 export default function DashboardCard() {
 
     const { total, income } = useSelector(state => state.statisticReducer);
-
-    const numberWithCommas = (num) => {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " vnđ";
-    }
 
     return (
         <div className='card-content'>
@@ -23,7 +20,7 @@ export default function DashboardCard() {
             </Card>
             <Card title={`Tổng thu ${moment().year()}`} bordered={true} className='card-item'>
                 <Card.Meta
-                    title={numberWithCommas(income)}
+                    title={numberWithCommas(income) + 'vnđ'}
                     description={'Tính đến: ' + moment().format('DD-MM-YYYY')}
                 />
             </Card>

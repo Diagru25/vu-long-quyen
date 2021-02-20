@@ -15,8 +15,13 @@ const routes = [
     },
     {
         path: '/setting',
-        component: (<div>setting</div>),
-        exact: true
+        component: React.lazy(() => import('src/Setting/Setting')),
+        exact: true,
+    },
+    {
+        path: '/account',
+        component: React.lazy(() => import('src/Account/Account')),
+        exact: true,
     }
 ];
 

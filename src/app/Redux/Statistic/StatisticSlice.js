@@ -42,5 +42,5 @@ const statisticSlice = createSlice({
     }
 });
 
-export const { } = statisticSlice.actions;
+//export const { } = statisticSlice.actions;
 export default statisticSlice.reducer;

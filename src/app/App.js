@@ -2,13 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 
-import { setLoggedIn } from 'src/Redux/Auth';
+import { setLoggedIn, setUser } from 'src/Redux/Auth';
 
 import firebase from 'helper/firebaseConfig';
 import routes from 'shared/Routes/routes';
 
-import Login from 'src/Authentication/Login';
 import Loading from 'src/Loading/Loading';
+import Login from 'src/Authentication/Login';
 
 const App = () => {
     return (
@@ -35,9 +35,11 @@ const MainApp = () => {
     useEffect(() => {
         firebase.auth.onAuthStateChanged(function (user) {
             if (user) {
-                //console.log(user.email);
+                //console.log('check: ', user.email);
+                dispatch(setUser({ displayName: user.displayName, photoURL: user.photoURL }));
                 dispatch(setLoggedIn(true));
             } else {
+                dispatch(setUser(null));
                 dispatch(setLoggedIn(false));
             }
         });
@@ -46,11 +48,13 @@ const MainApp = () => {
 
     if (isLoggedIn === false) {
         return (
-            <Switch>
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/register' component={() => <div>Register</div>} />
-                <Redirect from='/' to='/login' />
-            </Switch>
+            <Suspense fallback={<Loading />}>
+                <Switch>
+                    <Route exact path='/login' component={Login} />
+                    <Route exact path='/register' component={() => <div>Register</div>} />
+                    <Redirect from='/' to='/login' />
+                </Switch>
+            </Suspense>
         );
     }
 

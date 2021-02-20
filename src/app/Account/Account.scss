@@ -1,0 +1,19 @@
+.account-content {
+  display: flex;
+  padding: 40px;
+  .header {
+    text-align: center;
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+  }
+  .profile {
+    flex: 1;
+    padding: 10px 20px;
+    border-right: 1px solid lightgray;
+  }
+  .password {
+    flex: 1;
+    padding: 10px 20px;
+    border-left: 1px solid lightgray;
+  }
+}

@@ -21,8 +21,6 @@ export const DynamicPromotionDate = ({ data, curBeltID }) => {
 
     const dispatch = useDispatch();
 
-    console.log(data);
-
     const handleOnChangeSelect = (value, index) => {
         let promotionDate = [...data];
         let prvElement = promotionDate[index];

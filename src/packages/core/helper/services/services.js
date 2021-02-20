@@ -39,4 +39,15 @@ const beltServices = {
     },
 };
 
-export { studentServices, beltServices };
+const settingServices = {
+    getFee: () => {
+        return db.ref().child('feePerMonth').once('value');
+    },
+
+    updateFee: (fee) => {
+        const curUpdate = db.ref().child('feePerMonth');
+        return curUpdate.set(fee);
+    }
+}
+
+export { studentServices, beltServices, settingServices };

@@ -23,8 +23,13 @@ const calIncome = (arr) => {
     return income;
 }
 
+const numberWithCommas = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export {
     getFirstName,
     getFromTo,
-    calIncome
+    calIncome,
+    numberWithCommas
 }

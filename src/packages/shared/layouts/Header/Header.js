@@ -1,13 +1,15 @@
 import './Header.scss';
 
-import { Avatar } from 'adapters/ant-design';
+import { Avatar, Tooltip } from 'adapters/ant-design';
 import React, { Fragment } from 'react';
 import { toggleSideBar } from 'src/Redux/Menu';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import firebase from 'helper/firebaseConfig';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+
+    const { user } = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
 
     const onLogout = () => {
@@ -19,6 +21,21 @@ const Header = () => {
                 console.log(error);
             })
     }
+
+    const userDisplay =
+        user != null
+            ?
+            user.displayName
+                ?
+                <span style={{ color: 'white' }}>{user.displayName}</span>
+                :
+                <div className='avatar'>
+                    <Avatar>User</Avatar>
+                </div>
+            :
+            <div className='avatar'>
+                <Avatar>User</Avatar>
+            </div>
 
     return (
         <Fragment>
@@ -46,9 +63,15 @@ const Header = () => {
                     </span>
                 </div>
 
-                <div className='avatar'>
-                    <Avatar>USER</Avatar>
-                </div>
+                <Link to='/account'>
+                    <Tooltip title={user !== null ? user.displayName : 'User'}>
+
+                        {userDisplay}
+
+                    </Tooltip>
+
+                </Link>
+
             </div>
         </Fragment>
     );

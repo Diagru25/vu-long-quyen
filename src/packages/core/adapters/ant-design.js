@@ -19,7 +19,7 @@ export {
     Pagination,
     Card,
     List,
-    message
+    message,
 } from 'antd';
 
 export { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
