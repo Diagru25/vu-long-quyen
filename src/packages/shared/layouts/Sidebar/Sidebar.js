@@ -26,12 +26,19 @@ const Sidebar = () => {
                         </div>
                     </NavLink>
                 </li>
-
                 <li>
                     <NavLink to='/setting' activeClassName='activated'>
                         <div className='items'>
                             <i className='fas fa-cog'></i>
                             <span>Cài đặt</span>
+                        </div>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='/account' activeClassName='activated'>
+                        <div className='items'>
+                            <i className='fas fa-user'></i>
+                            <span>Tài khoản</span>
                         </div>
                     </NavLink>
                 </li>

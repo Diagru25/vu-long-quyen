@@ -17,3 +17,20 @@
     border-left: 1px solid lightgray;
   }
 }
+
+@media (max-width: 768px) {
+  .account-content {
+    flex-direction: column;
+    .profile {
+      border-right: none;
+      border-bottom: 1px solid lightgray;
+      padding: 20px 10px;
+    }
+
+    .password {
+      border-left: none;
+      border-top: 1px solid lightgray;
+      padding: 20px 10px;
+    }
+  }
+}

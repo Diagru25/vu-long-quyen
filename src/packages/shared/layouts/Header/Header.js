@@ -27,7 +27,10 @@ const Header = () => {
             ?
             user.displayName
                 ?
-                <span style={{ color: 'white' }}>{user.displayName}</span>
+                <div className="avatar">
+                    <span>{user.displayName}</span>
+                </div>
+
                 :
                 <div className='avatar'>
                     <Avatar>User</Avatar>
@@ -74,8 +77,8 @@ const Header = () => {
                     </Tooltip>
                 </div>
 
-                <Link to='/account' style={{ paddingTop: '1px' }}>
-                    <Tooltip title={user !== null ? user.displayName : 'User'}>
+                <Link to='/account' style={{ paddingTop: '0px' }}>
+                    <Tooltip title='Tài khoản'>
                         {userDisplay}
                     </Tooltip>
 

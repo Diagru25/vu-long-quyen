@@ -26,7 +26,14 @@
   }
 
   .avatar {
-    margin-right: 0;
+    margin: 2px 0px;
+    padding: 0px 5px;
+    color: #fff;
+    &:hover {
+      cursor: pointer;
+      background-color: #646464;
+      border-radius: 5px;
+    }
   }
 }
 
