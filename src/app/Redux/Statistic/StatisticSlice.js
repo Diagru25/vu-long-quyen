@@ -18,8 +18,8 @@ const statisticSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase((fetchData.fulfilled), (state, action) => {
-            state.list = action.payload.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
-            state.listPaid = action.payload.listPaid.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+            state.list = action.payload.list.sort((a, b) => (getFirstName(a.name).localeCompare(getFirstName(b.name))));
+            state.listPaid = action.payload.listPaid.sort((a, b) => (getFirstName(a.name).localeCompare(getFirstName(b.name))));
             state.total = action.payload.total;
             state.paid = action.payload.paid;
             state.haveNotPaid = action.payload.haveNotPaid;
@@ -32,7 +32,7 @@ const statisticSlice = createSlice({
 
             state.list.splice(foundIndex, 1);
             state.listPaid.push(action.payload.student);
-            state.listPaid.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+            state.listPaid.sort((a, b) => (getFirstName(a.name).localeCompare(getFirstName(b.name))));
 
             state.paid += 1;
             state.haveNotPaid -= 1;
