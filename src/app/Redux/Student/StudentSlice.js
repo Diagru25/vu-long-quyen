@@ -70,11 +70,11 @@ const StudentSlice = createSlice({
 
             switch (state.orderBy) {
                 case 'nameDes':
-                    state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+                    state.list.sort((a, b) => (getFirstName(a.name).localeCompare(getFirstName(b.name))));
                     state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
                     break;
                 case 'nameInc':
-                    state.list.sort((a, b) => (getFirstName(a.name) < getFirstName(b.name) ? 1 : -1));
+                    state.list.sort((a, b) => (getFirstName(a.name).localeCompare(getFirstName(b.name)) < 0 ? 1 : -1));
                     state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
                     break;
                 default: alert('Chưa xong - mai làm !');
@@ -95,9 +95,7 @@ const StudentSlice = createSlice({
         })
         builder.addCase(fetchAllStudents.fulfilled, (state, action) => {
             state.total = action.payload.total;
-            state.list = action.payload.data;
-
-            state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+            state.list = action.payload.data.sort((a, b) => (getFirstName(a.name).localeCompare(getFirstName(b.name))));
 
             state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
@@ -108,7 +106,7 @@ const StudentSlice = createSlice({
         builder.addCase(addStudent.fulfilled, (state, action) => {
             state.list.push({ ...state.currentStudent, key: action.payload.key });
             state.total += 1;
-            state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+            state.list.sort((a, b) => (getFirstName(a.name).localeCompare(getFirstName(b.name))));
 
             state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
@@ -123,7 +121,7 @@ const StudentSlice = createSlice({
             );
             state.list[foundIndex] = state.currentStudent;
 
-            state.list.sort((a, b) => (getFirstName(a.name) > getFirstName(b.name) ? 1 : -1));
+            state.list.sort((a, b) => (getFirstName(a.name).localeCompare(getFirstName(b.name))));
             state.currentList = getFromTo(state.list, state.pageIndex, state.pageSize);
 
             let name = state.currentStudent.name;
