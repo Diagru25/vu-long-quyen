@@ -20,6 +20,7 @@ export {
     Card,
     List,
     message,
+    Dropdown
 } from 'antd';
 
 export { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';

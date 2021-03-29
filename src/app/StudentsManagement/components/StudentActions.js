@@ -14,6 +14,8 @@ import {
 } from 'src/Redux/Student';
 
 import StudentModal from 'shared/modals/StudentModal';
+import DownloadDropdown from 'shared/Button/DownloadDropdown';
+import DownloadDOC from 'shared/Button/exportDOC';
 
 import { SORT } from 'helper/models';
 import { fetchAllStudents } from 'app/Redux/Student';
@@ -56,36 +58,40 @@ const StudentActions = () => {
     };
 
     return (
-        <div className='actions'>
-            <Select placeholder='Sắp xếp' defaultValue='nameDes' onChange={value => handleFilter(value)}>
-                {SORT.map(element =>
-                    <Option key={element.value} value={element.value}>
-                        {element.title}
-                    </Option>
-                )}
-            </Select>
-            <Input
-                placeholder='Tìm kiếm theo tên...'
-                style={{ margin: '0  15px' }}
-                value={txtSearch.text}
-                onChange={e => setTxtSearch(e.target.value)}
-            />
-            <Button type='primary' onClick={showStudentModal}>
-                Thêm mới
+        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '15px' }}>
+            <div className='actions'>
+                <Select placeholder='Sắp xếp' defaultValue='nameDes' onChange={value => handleFilter(value)}>
+                    {SORT.map(element =>
+                        <Option key={element.value} value={element.value}>
+                            {element.title}
+                        </Option>
+                    )}
+                </Select>
+                <Input
+                    placeholder='Tìm kiếm theo tên...'
+                    style={{ margin: '0  15px' }}
+                    value={txtSearch.text}
+                    onChange={e => setTxtSearch(e.target.value)}
+                />
+                <Button type='primary' onClick={showStudentModal}>
+                    Thêm mới
             </Button>
-            <StudentModal
-                isVisible={isVisible}
-                title={title}
-                handleCancel={handleCancel}
-                footer={[
-                    <Button key='btn1' type='default' onClick={handleCancel}>
-                        Hủy
+                <StudentModal
+                    isVisible={isVisible}
+                    title={title}
+                    handleCancel={handleCancel}
+                    footer={[
+                        <Button key='btn1' type='default' onClick={handleCancel}>
+                            Hủy
                     </Button>,
-                    <Button key='btn2' type='primary' onClick={handleOK}>
-                        Lưu
+                        <Button key='btn2' type='primary' onClick={handleOK}>
+                            Lưu
                     </Button>,
-                ]}
-            />
+                    ]}
+                />
+            </div>
+            <DownloadDropdown />
+            <DownloadDOC />
         </div>
     );
 };
